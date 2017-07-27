@@ -43,4 +43,10 @@ var app = {
     }
 };
 
+
+$(function() {
+	//$('#dataNascimento').datepicker();
+	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
+});
+
 app.initialize();
