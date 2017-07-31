@@ -43,10 +43,50 @@ var app = {
     }
 };
 
+function listaGfcms(data){
+	$("#selGfcm").html("");
+	$.each(data, function (index, value) {
+		$("#selGfcm").append('<option value="' + index + '">' + value + '</option>');
+	});
+}
+
+autenticado = 0;
+function verificaAutenticacao(data){
+	if(data.success == 1){
+		autenticado = 1;
+	}
+}
+
+//urlServidor = 'http://127.0.0.1/conferencias';
+urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
 
 $(function() {
 	//$('#dataNascimento').datepicker();
 	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
+	
+	
+	
+	if( ! autenticado){
+		$.post( 
+			urlServidor + '/app/login', 
+			{ "login" : "admin", "senha" : "conferencias" },
+			function(){},
+			'jsonp'
+		)
+		.done(function( data ) {
+			alert( "Data Loaded: " + data );
+		});
+	}
+	
+	$.get(
+		urlServidor + '/Gfcms/list',
+		function(data){
+			alert('passo aki');
+			console.log('passo aki');
+			$("#selGfcm").html("");
+		},
+		'jsonp'
+	);
 });
 
 app.initialize();
