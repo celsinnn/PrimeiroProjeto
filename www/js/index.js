@@ -58,23 +58,17 @@ function verificaAutenticacao(data){
 }
 
 //urlServidor = 'http://127.0.0.1/conferencias';
-urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
+//urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
+urlServidor = 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json';
 
 $(function() {
 	//$('#dataNascimento').datepicker();
 	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
 	
-	
-	
-	$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
-		console.log('passo aki');
-		$( "#popupBasic" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
-		evt.preventDefault();
-	});
-	
+	$("#teste").html("Atualizando a lista de GFCMs utilizando o servidor " + urlServidor);
 	
 	autenticado = 0;
-	if( ! autenticado){
+	/*if( ! autenticado){
 		$.ajax({
 			type		: 'POST',
 			url			: urlServidor + '/app/login', 
@@ -98,25 +92,27 @@ $(function() {
 							}
 						}
 		});
-	}
+	}*/
 	
 	$.ajax({
 		type		: 'GET',
 		//url			: urlServidor + '/Gfcms/list',
-		url			: 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
+		url			: urlServidor,
 		
 		jsonp		: 'listaGfcms',
 		dataType	: 'jsonp',
 		beforeSend	: function(){$.mobile.loading('show');},
 		complete	: function(){$.mobile.loading('hide');},
 		success		: function(response){
-						console.log(response);
+						$("#teste").append("\n Lista de GFCMs atualizada!");
 					},
 		error		: function(jqXHR, strError){
 						if(jqXHR.statusText != "success"){
 							$( "#mensagens" ).find( "#mensagem" ).html("Erro ao carregar a lista de GFCMs");
 							$( "#mensagens" ).popup();
 							$( "#mensagens" ).popup( "open" );
+						} else {
+							$("#teste").append("\n<br>Lista de GFCMs atualizada!");
 						}
 					}
 	});
