@@ -251,6 +251,8 @@ $(function() {
 						},
 			
 			jsonp		: 'listaGfcms',
+			tryCount	: 0,
+			retryLimit	: 3,
 			beforeSend	: function(){$.mobile.loading('show');},
 			complete	: function(){$.mobile.loading('hide');},
 			error		: function(jqXHR, strError, txt){
