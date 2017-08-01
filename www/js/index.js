@@ -73,51 +73,51 @@ $(function() {
 	});
 	
 	
-	
+	autenticado = 0;
 	if( ! autenticado){
 		$.ajax({
 			type		: 'POST',
 			url			: urlServidor + '/app/login', 
+			
+			jsonp		: 'verificaAutenticacao',
+			dataType	: 'jsonp',
+			
 			data		: { "login" : "admin", "senha" : "conferencias" },
-			crossDomain	: true,
+			
+			success		: function(response){
+							console.log(response);
+						},
+			
 			beforeSend	: function(){$.mobile.loading('show');},
 			complete	: function(){$.mobile.loading('hide');},
-			dataType	: 'jsonp',
 			error		: function(jqXHR, strError){
-				if(jqXHR.statusText != "success"){
-					$( "#mensagens" ).find( "#mensagem" ).html("Erro de autenticacao");
-					$( "#mensagens" ).popup();
-					$( "#mensagens" ).popup( "open" );
-				}
-			}
-		});
-		
-		$.post( 
-			urlServidor + '/app/login', 
-			{ "login" : "admin", "senha" : "conferencias" },
-			function(){},
-			'jsonp'
-		)
-		.done(function( data ) {
-			alert( "Data Loaded: " + data );
+							if(jqXHR.statusText != "success"){
+								$( "#mensagens" ).find( "#mensagem" ).html("Erro de autenticacao");
+								$( "#mensagens" ).popup();
+								$( "#mensagens" ).popup( "open" );
+							}
+						}
 		});
 	}
 	
 	$.ajax({
 		type		: 'GET',
 		url			: urlServidor + '/Gfcms/list',
-		crossDomain	: true,
+		
+		jsonp		: 'listaGfcms',
+		dataType	: 'jsonp',
 		beforeSend	: function(){$.mobile.loading('show');},
 		complete	: function(){$.mobile.loading('hide');},
-		dataType	: 'jsonp',
-		//success		: function(response){},
+		success		: function(response){
+						console.log(response);
+					},
 		error		: function(jqXHR, strError){
-			if(jqXHR.statusText != "success"){
-				$( "#mensagens" ).find( "#mensagem" ).html("Erro ao carregar a lista de GFCMs");
-				$( "#mensagens" ).popup();
-				$( "#mensagens" ).popup( "open" );
-			}
-		}
+						if(jqXHR.statusText != "success"){
+							$( "#mensagens" ).find( "#mensagem" ).html("Erro ao carregar a lista de GFCMs");
+							$( "#mensagens" ).popup();
+							$( "#mensagens" ).popup( "open" );
+						}
+					}
 	});
 });
 
