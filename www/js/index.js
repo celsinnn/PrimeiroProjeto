@@ -48,6 +48,8 @@ function listaGfcms(data){
 	$.each(data, function (index, value) {
 		$("#selGfcm").append('<option value="' + index + '">' + value + '</option>');
 	});
+	$("#teste").append("\n<br>Lista de GFCMs atualizada!");
+	$("#teste").append("\n<br>"+data);
 }
 
 autenticado = 0;
@@ -60,8 +62,9 @@ function verificaAutenticacao(data){
 //urlServidor = 'http://127.0.0.1/conferencias';
 //urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
 urlServidor = 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json';
-
-
+myJqXHR = 0;
+myStrError = 0;
+myTxt = 0;
 
 //$(function() {
 $(document).on('pageshow',function(){
@@ -104,13 +107,21 @@ $(document).on('pageshow',function(){
 		dataType	: 'jsonp',
 		success		: function(response){
 						listaGfcms(response);
-						$("#teste").append("\n Lista de GFCMs atualizada!");
 					},
 		
 		//jsonp		: 'listaGfcms',
-		/*beforeSend	: function(){$.mobile.loading('show');},
+		beforeSend	: function(){$.mobile.loading('show');},
 		complete	: function(){$.mobile.loading('hide');},
-		error		: function(jqXHR, strError){
+		error		: function(jqXHR, strError, txt){
+						myJqXHR = jqXHR;
+						myStrError = strError;
+						myTxt = txt;
+						
+						$("#teste").append("\n<br>myJqXHR: "+myJqXHR);
+						$("#teste").append("\n<br>myJqXHR.statusText: "+myJqXHR.statusText);
+						$("#teste").append("\n<br>myStrError: "+myStrError);
+						$("#teste").append("\n<br>myTxt: "+myTxt);
+						
 						if(jqXHR.statusText != "success"){
 							$( "#mensagens" ).find( "#mensagem" ).html("Erro ao carregar a lista de GFCMs");
 							$( "#mensagens" ).popup();
@@ -118,7 +129,7 @@ $(document).on('pageshow',function(){
 						} else {
 							$("#teste").append("\n<br>Lista de GFCMs atualizada!");
 						}
-					}*/
+					}
 	});
 });
 
