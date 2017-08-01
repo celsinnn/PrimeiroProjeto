@@ -113,3 +113,11 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+body{
+	text-transform: none;
+}
+
+.ui-popup {
+	padding: 5px 7px 5px 7px;
+}
