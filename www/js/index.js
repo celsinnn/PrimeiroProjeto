@@ -66,6 +66,14 @@ $(function() {
 	
 	
 	
+	$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
+		console.log('passo aki');
+		$( "#popupBasic" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
+		evt.preventDefault();
+	});
+	
+	
+	
 	if( ! autenticado){
 		$.post( 
 			urlServidor + '/app/login', 
@@ -78,15 +86,22 @@ $(function() {
 		});
 	}
 	
-	$.get(
-		urlServidor + '/Gfcms/list',
-		function(data){
-			alert('passo aki');
-			console.log('passo aki');
-			$("#selGfcm").html("");
-		},
-		'jsonp'
-	);
+	$.ajax({
+		type		: 'GET',
+		url			: urlServidor + '/Gfcms/list',
+		crossDomain	: true,
+		beforeSend	: function(){$.mobile.loading('show');},
+		complete	: function(){$.mobile.loading('hide');},
+		dataType	: 'jsonp',
+		//success		: function(response){},
+		error		: function(jqXHR, strError){
+			if(jqXHR.statusText != "success"){
+				$( "#mensagens" ).find( "#mensagem" ).html("Erro ao carregar a lista de GFCMs");
+				$( "#mensagens" ).popup();
+				$( "#mensagens" ).popup( "open" );
+			}
+		}
+	});
 });
 
 app.initialize();
