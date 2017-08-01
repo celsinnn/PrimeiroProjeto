@@ -75,6 +75,23 @@ $(function() {
 	
 	
 	if( ! autenticado){
+		$.ajax({
+			type		: 'POST',
+			url			: urlServidor + '/app/login', 
+			data		: { "login" : "admin", "senha" : "conferencias" },
+			crossDomain	: true,
+			beforeSend	: function(){$.mobile.loading('show');},
+			complete	: function(){$.mobile.loading('hide');},
+			dataType	: 'jsonp',
+			error		: function(jqXHR, strError){
+				if(jqXHR.statusText != "success"){
+					$( "#mensagens" ).find( "#mensagem" ).html("Erro de autenticacao");
+					$( "#mensagens" ).popup();
+					$( "#mensagens" ).popup( "open" );
+				}
+			}
+		});
+		
 		$.post( 
 			urlServidor + '/app/login', 
 			{ "login" : "admin", "senha" : "conferencias" },
