@@ -43,26 +43,26 @@ var app = {
     }
 };
 
-function listaGfcms(data){
+/*function listaGfcms(data){
 	$("#selGfcm").html("");
 	$.each(data, function (index, value) {
 		$("#selGfcm").append('<option value="' + index + '">' + value + '</option>');
 	});
-}
+}*/
 
 autenticado = 0;
-function verificaAutenticacao(data){
+/*function verificaAutenticacao(data){
 	if(data.success == 1){
 		autenticado = 1;
 	}
-}
+}*/
 
 //urlServidor = 'http://127.0.0.1/conferencias';
-urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
+//urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
 
 $(function() {
 	//$('#dataNascimento').datepicker();
-	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
+	/*$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
 	
 	
 	
@@ -101,7 +101,7 @@ $(function() {
 				$( "#mensagens" ).popup( "open" );
 			}
 		}
-	});
+	});*/
 });
 
 app.initialize();
