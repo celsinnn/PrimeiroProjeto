@@ -102,7 +102,8 @@ $(function() {
 	
 	$.ajax({
 		type		: 'GET',
-		url			: urlServidor + '/Gfcms/list',
+		//url			: urlServidor + '/Gfcms/list',
+		url			: 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
 		
 		jsonp		: 'listaGfcms',
 		dataType	: 'jsonp',
