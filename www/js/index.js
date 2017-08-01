@@ -98,17 +98,17 @@ $(document).on('pageshow',function(){
 	}*/
 	
 	$.ajax({
-		type		: 'GET',
+		//type		: 'GET',
 		//url			: urlServidor + '/Gfcms/list',
 		url			: urlServidor,
-		
-		jsonp		: 'listaGfcms',
 		dataType	: 'jsonp',
-		beforeSend	: function(){$.mobile.loading('show');},
-		complete	: function(){$.mobile.loading('hide');},
 		success		: function(response){
 						$("#teste").append("\n Lista de GFCMs atualizada!");
 					},
+		
+		//jsonp		: 'listaGfcms',
+		beforeSend	: function(){$.mobile.loading('show');},
+		complete	: function(){$.mobile.loading('hide');},
 		error		: function(jqXHR, strError){
 						if(jqXHR.statusText != "success"){
 							$( "#mensagens" ).find( "#mensagem" ).html("Erro ao carregar a lista de GFCMs");
