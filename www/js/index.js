@@ -103,11 +103,12 @@ $(document).on('pageshow',function(){
 		url			: urlServidor,
 		dataType	: 'jsonp',
 		success		: function(response){
+						listaGfcms(response);
 						$("#teste").append("\n Lista de GFCMs atualizada!");
 					},
 		
 		//jsonp		: 'listaGfcms',
-		beforeSend	: function(){$.mobile.loading('show');},
+		/*beforeSend	: function(){$.mobile.loading('show');},
 		complete	: function(){$.mobile.loading('hide');},
 		error		: function(jqXHR, strError){
 						if(jqXHR.statusText != "success"){
@@ -117,7 +118,7 @@ $(document).on('pageshow',function(){
 						} else {
 							$("#teste").append("\n<br>Lista de GFCMs atualizada!");
 						}
-					}
+					}*/
 	});
 });
 
