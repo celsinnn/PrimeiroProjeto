@@ -68,7 +68,7 @@ $(document).on('pageshow',function(){
 	//$('#dataNascimento').datepicker();
 	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
 	
-	$("#teste").html("Atualizando a lista de GFCMs utilizando o servidor " + urlServidor);
+	$("#teste").html("Atualizando lista de GFCMs utilizando o servidor " + urlServidor);
 	
 	/*autenticado = 0;
 	if( ! autenticado){
