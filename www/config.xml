@@ -6,7 +6,7 @@
         id        = "com.phonegap.helloworld"
         version   = "1.0.0">
 
-    <name>Cadastro de Irmaos Igreja em BH</name>
+    <name>Cadastro Igreja em BH</name>
 
     <description>
         Este aplicativo visa gerenciar o cadastro de irmãos da Igreja em Belo Horizonte
