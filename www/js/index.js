@@ -56,42 +56,19 @@ autenticado = 0;
 function verificaAutenticacao(data){
 	if(data.success == 1){
 		autenticado = 1;
+		$("#teste").append("\n<br>Usuario autenticado!");
+	} else {
+		$("#teste").append("\n<br>Usuario NÃO autenticado!");
 	}
 }
 
 //urlServidor = 'http://127.0.0.1/conferencias';
-//urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
-urlServidor = 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json';
+urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
+//urlServidor = 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json';
 myJqXHR = 0;
 myStrError = 0;
 myTxt = 0;
-
-	
-var xhr = $.ajaxSettings.xhr();
-xhr.upload.addEventListener( function( event ) {
-	$("#teste").append("\n<br>Event Listener do XHR");
-}, false );
-
-function xhrProvider() {
-	return xhr;
-}
-
-$(function() {
-	$("#atualizaGfcm").on('click', null, null, function(){
-		$.ajax({
-			//type		: 'GET',
-			//url			: urlServidor + '/Gfcms/list',
-			url			: urlServidor,
-			dataType	: 'jsonp',
-			
-			success		: function(response){
-							listaGfcms(response);
-						},
-			
-			timeout		: 3000,
-			cache		: false,
-			xhr			: xhrProvider,
-			statusCode	: {
+statusCodeMessages = {
 							400: function() {
 								  $("#teste").append("\n<br>Requisição inválida");
 								},
@@ -248,7 +225,73 @@ $(function() {
 							122: function() {
 								  $("#teste").append("\n<br>Pedido-URI muito longo");
 								}
+						}
+	
+var xhr = $.ajaxSettings.xhr();
+xhr.upload.addEventListener( function( event ) {
+	$("#teste").append("\n<br>Event Listener do XHR");
+}, false );
+
+function xhrProvider() {
+	return xhr;
+}
+
+$(function() {
+	
+	autenticado = 0;
+	if( ! autenticado){
+		$.ajax({
+			type		: 'POST',
+			url			: urlServidor + '/app/login', 
+			
+			jsonp		: 'verificaAutenticacao',
+			dataType	: 'jsonp',
+			
+			data		: { "login" : "admin", "senha" : "conferencias" },
+			
+			success		: function(response){},
+			timeout		: 3000,
+			cache		: false,
+			xhr			: xhrProvider,
+			statusCode	: statusCodeMessages,
+			tryCount	: 0,
+			retryLimit	: 3,
+			
+			beforeSend	: function(){$.mobile.loading('show');},
+			complete	: function(){$.mobile.loading('hide');},
+			error		: function(jqXHR, strError, txt){
+							
+							$("#teste").append("\n<br>jqXHR: "+jqXHR);
+							$("#teste").append("\n<br>jqXHR.statusText: "+jqXHR.statusText);
+							$("#teste").append("\n<br>strError: "+strError);
+							$("#teste").append("\n<br>txt: "+txt);
+							
+							if(jqXHR.statusText != "success"){
+								$( "#mensagens" ).find( "#mensagem" ).html("Erro de autenticacao");
+								$( "#mensagens" ).popup();
+								$( "#mensagens" ).popup( "open" );
+							} {
+								$("#teste").append("\n<br>Erro na autenticação com retorno success");
+							}
+						}
+		});
+	}
+	
+	//$("#atualizaGfcm").on('click', null, null, function(){
+		$.ajax({
+			//type		: 'GET',
+			url			: urlServidor + '/Gfcms/list',
+			//url			: urlServidor,
+			dataType	: 'jsonp',
+			
+			success		: function(response){
+							listaGfcms(response);
 						},
+			
+			timeout		: 3000,
+			cache		: false,
+			xhr			: xhrProvider,
+			statusCode	: statusCodeMessages,
 			
 			jsonp		: 'listaGfcms',
 			tryCount	: 0,
@@ -273,48 +316,19 @@ $(function() {
 								$("#teste").append("\n<br>Lista de GFCMs atualizada!");
 							}
 						}
-		}).then(function(){
+		});
+		/*.then(function(){
 			$("#teste").append("\n<br>Then done");
 		}).then(function(){
 			$("#teste").append("\n<br>Then fail");
-		});
-	});
+		});*/
+	//});
 	
 });
 	
 $(document).on('pageshow',function(){
 	//$('#dataNascimento').datepicker();
 	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
-	
-	$("#teste").html("Atualizando lista de GFCMs utilizando o servidor " + urlServidor);
-	
-	/*autenticado = 0;
-	if( ! autenticado){
-		$.ajax({
-			type		: 'POST',
-			url			: urlServidor + '/app/login', 
-			
-			jsonp		: 'verificaAutenticacao',
-			dataType	: 'jsonp',
-			
-			data		: { "login" : "admin", "senha" : "conferencias" },
-			
-			success		: function(response){
-							console.log(response);
-						},
-			
-			beforeSend	: function(){$.mobile.loading('show');},
-			complete	: function(){$.mobile.loading('hide');},
-			error		: function(jqXHR, strError){
-							if(jqXHR.statusText != "success"){
-								$( "#mensagens" ).find( "#mensagem" ).html("Erro de autenticacao");
-								$( "#mensagens" ).popup();
-								$( "#mensagens" ).popup( "open" );
-							}
-						}
-		});
-	}*/
-	
 });
 
 app.initialize();
