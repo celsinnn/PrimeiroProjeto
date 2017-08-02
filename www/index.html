@@ -21,20 +21,24 @@
 </head>
 <body>
 
-
-
 	<div data-role="page" id="pageInicio">
 		<div data-role="header">
 			<div data-role="navbar" data-iconpos="left">
 				<ul>
 					<li><a href="#pageInicio" data-icon="home" class="ui-btn-active  ui-state-persist" id="btnInicio">Início</a></li>
 					<li><a href="#pageNovoIrmao" data-icon="user" id="btnNovo">Novo</a></li>
-					<li><a data-icon="power" id="btnSair">Sair</a></li>
+					<li><a data-icon="power" class="btnSair" id="btnSair">Sair</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
 			<p id="teste"><p/>
+			
+			<div data-role="popup" id="mensagens" class="mensagens">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			
 			<!--
 			01/08/2017 14:46
 			ul data-role="listview">
@@ -54,17 +58,12 @@
 				<ul>
 					<li><a href="#pageInicio" data-icon="home" id="btnInicio">Início</a></li>
 					<li><a href="#pageNovoIrmao" data-icon="user" class="ui-btn-active  ui-state-persist" id="btnNovo">Novo</a></li>
-					<li><a data-icon="power" id="btnSair">Sair</a></li>
+					<li><a data-icon="power" class="btnSair" id="btnSair">Sair</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
 		
-			<div data-role="popup" id="mensagens">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Coloque a sua mensagem aqui</p>
-			</div>
-
 
 		
 			<label for="text-basic">Nome:</label>
@@ -95,6 +94,36 @@
 			<h4><!--RODAPE--></h4>
 		</div>
 	</div>
+	
+	
+	<div data-role="page" id="pageLogin">
+		<div data-role="header">
+			<h2>Login</h2>
+		</div>
+		<div data-role="content">
+			
+			<div data-role="popup" id="mensagens" class="mensagens">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+		
+			<form id="formLogin" action="/app/login" data-jsonp="verificaAutenticacao">
+			
+				<label for="text-basic">Usuário:</label>
+				<input name="login" id="text-basic" value="" type="text">
+			
+				<label for="password">Senha:</label>
+				<input type="password" name="senha" id="senha" value="" autocomplete="off">
+				
+				<input type="submit" value="Entrar" data-icon="power">
+			
+			</form>
+			
+		</div>
+		<div data-role="footer">
+		</div>
+	</div>
+	
 	
 </body>
 </html>
