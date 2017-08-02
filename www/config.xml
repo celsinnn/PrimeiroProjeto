@@ -6,14 +6,14 @@
         id        = "com.phonegap.helloworld"
         version   = "1.0.0">
 
-    <name>Hello World</name>
+    <name>Cadastro de Irmaos Igreja em BH</name>
 
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Este aplicativo visa gerenciar o cadastro de irmãos da Igreja em Belo Horizonte
     </description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">
-        PhoneGap Team
+    <author href="http://phonegap.com" email="irmaocelsinho@gmail.com">
+        Celso Magalhães Ferreira
     </author>
 
     <!--
@@ -37,6 +37,7 @@
     <preference name="auto-hide-splash-screen"    value="true" />           <!-- ios: if set to false, the splash screen must be hidden using a JavaScript API -->
     <preference name="disable-cursor"             value="false" />          <!-- blackberry: prevents a mouse-icon/cursor from being displayed on the app -->
     <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
+    <preference name="windows-appx-target"        value="uap" />            <!-- Windows Phone. -->
     <!--
         Define a specific version of PhoneGap to build into your app.
         <preference name="phonegap-version"       value="3.5.0" />
