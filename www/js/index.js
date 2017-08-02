@@ -65,6 +65,9 @@ function verificaAutenticacao(data){
 //urlServidor = 'http://127.0.0.1/conferencias';
 urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
 //urlServidor = 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json';
+timeoutDefault = 10000;
+tryCountDefault = 0;
+retryLimitDefault = 5;
 myJqXHR = 0;
 myStrError = 0;
 myTxt = 0;
@@ -250,12 +253,12 @@ $(function() {
 			data		: { "login" : "admin", "senha" : "conferencias" },
 			
 			success		: function(response){},
-			timeout		: 3000,
+			timeout		: timeoutDefault,
 			cache		: false,
 			xhr			: xhrProvider,
 			statusCode	: statusCodeMessages,
-			tryCount	: 0,
-			retryLimit	: 3,
+			tryCount	: tryCountDefault,
+			retryLimit	: retryLimitDefault,
 			
 			beforeSend	: function(){$.mobile.loading('show');},
 			complete	: function(){$.mobile.loading('hide');},
@@ -288,14 +291,14 @@ $(function() {
 							listaGfcms(response);
 						},
 			
-			timeout		: 3000,
+			timeout		: timeoutDefault,
 			cache		: false,
 			xhr			: xhrProvider,
 			statusCode	: statusCodeMessages,
 			
 			jsonp		: 'listaGfcms',
-			tryCount	: 0,
-			retryLimit	: 3,
+			tryCount	: tryCountDefault,
+			retryLimit	: retryLimitDefault,
 			beforeSend	: function(){$.mobile.loading('show');},
 			complete	: function(){$.mobile.loading('hide');},
 			error		: function(jqXHR, strError, txt){
