@@ -121,3 +121,12 @@ body{
 .ui-popup {
 	padding: 5px 7px 5px 7px;
 }
+
+#padroes{
+	display: none;
+}
+
+.divFormLogin{
+	margin-left: 5%;
+	margin-right: 5%;
+}
