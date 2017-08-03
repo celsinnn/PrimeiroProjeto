@@ -28,367 +28,454 @@ var app = {
 //statusCodeMessages = {};
 statusCodeMessages = {
 						400: function() {
-								showMessage("Requisição inválida", 2000);
+								alert("Requisição inválida");
 							},
 						401: function() {
-								showMessage("Não autorizado", 2000);
+								alert("Não autorizado");
 							},
 						402: function() {
-								showMessage("Pagamento necessário", 2000);
+								alert("Pagamento necessário");
 							},
 						403: function() {
-								showMessage("Proibido", 2000);
+								alert("Proibido");
 							},
 						404: function() {
-								showMessage("Não encontrado", 2000);
+								alert("Não encontrado");
 							},
 						405: function() {
-								showMessage("Método não permitido", 2000);
+								alert("Método não permitido");
 							},
 						406: function() {
-								showMessage("Não Aceitável", 2000);
+								alert("Não Aceitável");
 							},
 						407: function() {
-								showMessage("Autenticação de proxy necessária", 2000);
+								alert("Autenticação de proxy necessária");
 							},
 						408: function() {
-								showMessage("Tempo de requisição esgotou (Timeout)", 2000);
+								alert("Tempo de requisição esgotou (Timeout)");
 							},
 						409: function() {
-								showMessage("Conflito", 2000);
+								alert("Conflito");
 							},
 						410: function() {
-								showMessage("Gone", 2000);
+								alert("Gone");
 							},
 						411: function() {
-								showMessage("comprimento necessário", 2000);
+								alert("comprimento necessário");
 							},
 						412: function() {
-								showMessage("Pré-condição falhou", 2000);
+								alert("Pré-condição falhou");
 							},
 						413: function() {
-								showMessage("Entidade de solicitação muito grande", 2000);
+								alert("Entidade de solicitação muito grande");
 							},
 						414 : function() {
-								showMessage("Pedido-URI Too Long", 2000);
+								alert("Pedido-URI Too Long");
 							},
 						415: function() {
-								showMessage("Tipo de mídia não suportado", 2000);
+								alert("Tipo de mídia não suportado");
 							},
 						416: function() {
-								showMessage("Solicitada de Faixa Não Satisfatória", 2000);
+								alert("Solicitada de Faixa Não Satisfatória");
 							},
 						417: function() {
-								showMessage("Falha na expectativa", 2000);
+								alert("Falha na expectativa");
 							},
 						418: function() {
-								showMessage("Eu sou um bule de chá", 2000);
+								alert("Eu sou um bule de chá");
 							},
 						422: function() {
-								showMessage("Entidade improcessável (WebDAV)", 2000);
+								alert("Entidade improcessável (WebDAV)");
 							},
 						423: function() {
-								showMessage("Fechado (WebDAV)", 2000);
+								alert("Fechado (WebDAV)");
 							},
 						424: function() {
-								showMessage("Falha de Dependência (WebDAV)", 2000);
+								alert("Falha de Dependência (WebDAV)");
 							},
 						425: function() {
-								showMessage("coleção não ordenada", 2000);
+								alert("coleção não ordenada");
 							},
 						426: function() {
-								showMessage("Upgrade Obrigatório", 2000);
+								alert("Upgrade Obrigatório");
 							},
 						450: function() {
-								showMessage("bloqueados pelo Controle de Pais do Windows", 2000);
+								alert("bloqueados pelo Controle de Pais do Windows");
 							},
 						499: function() {
-								showMessage("cliente fechou Pedido (utilizado em ERPs/VPSA)", 2000);
+								alert("cliente fechou Pedido (utilizado em ERPs/VPSA)");
 							},
 						500: function() {
-								showMessage("Erro interno do servidor (Internal Server Error)", 2000);
+								alert("Erro interno do servidor (Internal Server Error)");
 							},
 						501: function() {
-								showMessage("Não implementado (Not implemented)", 2000);
+								alert("Não implementado (Not implemented)");
 							},
 						502: function() {
-								showMessage("Bad Gateway", 2000);
+								alert("Bad Gateway");
 							},
 						503: function() {
-								showMessage("Serviço indisponível (Service Unavailable)", 2000);
+								alert("Serviço indisponível (Service Unavailable)");
 							},
 						504: function() {
-								showMessage("Gateway Time-Out", 2000);
+								alert("Gateway Time-Out");
 							},
 						505: function() {
-								showMessage("HTTP Version not supported", 2000);
+								alert("HTTP Version not supported");
 							},
 						300: function() {
-								showMessage("Múltipla escolha", 2000);
+								alert("Múltipla escolha");
 							},
 						301: function() {
-								showMessage("Movido", 2000);
+								alert("Movido");
 							},
 						302: function() {
-								showMessage("Encontrado", 2000);
+								alert("Encontrado");
 							},
 						404: function() {
-								showMessage("", 2000);
+								alert("");
 							},
 						304: function() {
-								showMessage("Não modificado", 2000);
+								alert("Não modificado");
 							},
 						305: function() {
-								showMessage("Use Proxy (desde HTTP/1.1)", 2000);
+								alert("Use Proxy (desde HTTP/1.1)");
 							},
 						306: function() {
-								showMessage("Proxy Switch", 2000);
+								alert("Proxy Switch");
 							},
 						307: function() {
-								showMessage("Redirecionamento temporário (desde HTTP/1.1)", 2000);
+								alert("Redirecionamento temporário (desde HTTP/1.1)");
 							},
 						/*200: function() {
-								showMessage("OK", 2000);
+								alert("OK");
 							},*/
 						201: function() {
-								showMessage("Criado", 2000);
+								alert("Criado");
 							},
 						202 : function() {
-								showMessage("Aceito", 2000);
+								alert("Aceito");
 							},
 						203: function() {
-								showMessage("não-autorizado (desde HTTP/1.1)", 2000);
+								alert("não-autorizado (desde HTTP/1.1)");
 							},
 						204: function() {
-								showMessage("Nenhum conteúdo", 2000);
+								alert("Nenhum conteúdo");
 							},
 						205: function() {
-								showMessage("Reset", 2000);
+								alert("Reset");
 							},
 						206: function() {
-								showMessage("Conteúdo parcial", 2000);
+								alert("Conteúdo parcial");
 							},
 						207: function() {
-								showMessage("Status Multi (WebDAV)", 2000);
+								alert("Status Multi (WebDAV)");
 							},
 						100: function() {
-								showMessage("Continuar", 2000);
+								alert("Continuar");
 							},
 						101: function() {
-								showMessage("Mudando protocolos", 2000);
+								alert("Mudando protocolos");
 							},
 						102: function() {
-								showMessage("Processamento (WebDAV)", 2000);
+								alert("Processamento (WebDAV)");
 							},
 						122: function() {
-								showMessage("Pedido-URI muito longo", 2000);
+								alert("Pedido-URI muito longo");
 							}
 					};
-	
-//urlServidor = 'http://127.0.0.1/conferencias';
-urlServidor = 'http://inscricaoconferenciabh.000webhostapp.com';
-//urlServidor = 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json';
-timeoutDefault = 2000;
-tryCountDefault = 0;
-retryLimitDefault = 2;
-loadingInProcess = 0;
-currPage = "";
 
-//myJqXHR = "";
-//myTextStatus = "";
-//myErrorThrown = "";
-
-countMsg = 0;
-function showMessage(mensagem, timeout = 0){ 
-	console.log(mensagem);
-	
-	modelo = $("#"+currPage).find("#mensagens").parent();
-	if( ! modelo.length){
-		modelo = $("#pageInicio"+currPage).find("#mensagens").parent();
-	}
-	
-	clone = modelo.clone();
-	clone.attr("id",  clone.attr("id")+(++countMsg));
-	popup = clone.find(".mensagens");
-	popup.attr("id",  popup.attr("id")+(countMsg));
-	
-	console.log(clone.attr("id"));
-	console.log(popup.attr("id"));
-	
-	
-	$("#"+currPage).find('[data-role="content"]').append(clone);
-	$("#"+currPage).find('[data-role="content"]').append('teste');
-	
-	
-	if(timeout > 0){
-		window.setTimeout(function() {
-			popup.find("#mensagem").html(mensagem);
-			popup.popup();
-			popup.popup( "open" );
-		}, 10);
-	}
-	
-	
-	if(timeout > 0){
-		window.setTimeout(function() {
-			//popup.popup( "close" );
-			//clone.remove();
-		}, timeout+10);
-	}
-}
-	
-function listaGfcms(data){
-	$("#selGfcm").html("");
-	$.each(data, function (index, value) {
-		$("#selGfcm").append('<option value="' + index + '">' + value + '</option>');
-	});
+/* Valores padrão 
+ */
+var defaultValues = {
+	// urlServidor : 'http://127.0.0.1/conferencias',
+	urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
+	// urlServidor : 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
+	timeoutDefault : 10000,
+	tryCountDefault : 0,
+	retryLimitDefault : 5,
+	loadingInProcess : 0,
+	currPage : ""
 }
 
-autenticado = 0;
-function verificaAutenticacao(data){
-	if(data.success == 1){
-		autenticado = 1;
-		window.location.href="index.html";
-	} else {
-		autenticado = 0;
-		showMessage("Usuário e senha não conferem.");
-	}
-}
-
-function verificaSessao(data){
-	if(data.success == 1){
-		autenticado = 1;
-	} else {
-		autenticado = 0;
-		showMessage("Você não está autenticado, por favor efetue login.", 2500);
-		window.setTimeout(function() {
-			window.location.href="index.html#pageLogin";
-		}, 2500);
-	}
-}
-
-function sair(){
-	autenticado = 0;
-	window.location.href="index.html#pageLogin";
-}
-
-$(function(){
+/* Objeto para registrar e guardar localmente a sessão da aplicação 
+ */
+sessao = {
+	autenticado: 0,
+	verificacaoEmAndamento: 0, // define se há "verificaSessao" ( =1 enquanto requisição não terminar)
 	
-	if(autenticado == 1){
-		$.ajax({
-			url			: urlServidor + '/Gfcms/list',
-			//url			: 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
-			//url			: 'http://www.fasfsadfsfsafas.mg.gov.br',
-			dataType	: 'jsonp',
-			success		: function(response){},
-			timeout		: timeoutDefault,
-			cache		: false,
-			statusCode	: statusCodeMessages,
-			jsonp		: 'listaGfcms',
-			tryCount	: tryCountDefault,
-			retryLimit	: retryLimitDefault,
-			beforeSend	: function(){
-							loadingInProcess++;
-							$.mobile.loading('show');
-						},
-			complete	: function(){
-							loadingInProcess--;
-							if(loadingInProcess == 0){
-								$.mobile.loading('hide');
+	/* Obtém o valor de "autenticado", considerando que há "verificacaoEmAndamento"; Executa "callback" após a verificação.
+	 */
+	getAutenticado: function(callback){
+		var intervalo = setInterval(function(){
+			if(sessao.verificacaoEmAndamento == 0){
+				clearInterval(intervalo);
+				callback(sessao.autenticado);
+			}
+		}, 200);
+	},
+	
+	/* Se o usuário e senha digitado na tela de login estão corretos, registra a sessão localmente
+	 */
+	verificaAutenticacao: function(data){
+							if(data.success == 1){
+								this.autenticado = 1;
+								window.location.href="index.html";
+							} else {
+								this.autenticado = 0;
+								alert("Usuário e senha não conferem.");
 							}
 						},
-			error		: function(jqXHR, textStatus, errorThrown){
-				
-							//myJqXHR = jqXHR;
-							//myTextStatus = textStatus;
-							//myErrorThrown = errorThrown;
-							
-							//$("#teste").append("\n<br>jqXHR: "+jqXHR);
-							//$("#teste").append("\n<br>jqXHR.statusText: "+jqXHR.statusText);
-							//$("#teste").append("\n<br>textStatus: "+textStatus);
-							//$("#teste").append("\n<br>errorThrown: "+errorThrown);
-							
-							if(jqXHR.statusText != "success"){
-								showMessage("Erro ao carregar a lista de GFCMs", 2000);
-							} 
-							//else {
-							//	$("#teste").append("\n<br>Lista de GFCMs atualizada!");
-							//}
+	
+	/* Chamada após o "validaSessao", para verificar se o usuário está autenticado
+	 */
+	verificaSessao: function (data){
+						this.verificacaoEmAndamento = 0;
+						if(data.success == 1){
+							this.autenticado = 1;
+						} else {
+							this.autenticado = 0;
+							window.location.href="index.html#pageLogin";
 						}
-		});
-	}
+					},
+	
+	/* Faz requisição ao servidor para verificar se o usuário está autenticado
+	 */
+	validaSessao: function (){
+					this.verificacaoEmAndamento = 1;
+					$.ajax({
+						url			: defaultValues.urlServidor + '/app/isLogged/',
+						dataType	: 'jsonp',
+						success		: function(response){},
+						timeout		: defaultValues.timeoutDefault,
+						cache		: false,
+						statusCode	: statusCodeMessages,
+						jsonp		: 'verificaSessao',
+						tryCount	: defaultValues.tryCountDefault,
+						retryLimit	: defaultValues.retryLimitDefault,
+						beforeSend	: function(jqXHR, settings){
+										jsonpCallback = settings.jsonpCallback;
+										settings.url = settings.url.replace(jsonpCallback, settings.jsonp)
+										urlArr = settings.url.split("?");
+										urlArr[1] = urlArr[1].replace(new RegExp('&', 'g'), '/').replace(new RegExp('=', 'g'), ':');
+										settings.url = urlArr[0] + urlArr[1];
+										
+										defaultValues.loadingInProcess++;
+										$.mobile.loading('show');
+									},
+						complete	: function(){
+										defaultValues.loadingInProcess--;
+										if(defaultValues.loadingInProcess == 0){
+											$.mobile.loading('hide');
+										}
+										this.verificacaoEmAndamento = 0;
+									},
+						error		: function(jqXHR, textStatus, errorThrown){
+										if(jqXHR.statusText != "success"){
+											alert("Erro ao validar autenticação de usuário.");
+										} 
+										this.verificacaoEmAndamento = 0;
+									}
+					});
+				},
+	
+	sair: function (){
+				this.autenticado = 0;
+				window.location.href="index.html#pageLogin";
+			}
+};
+
+dataTeste = {};
+function pesquisaIrmaos(data){
+	dataTeste = data;
+	
+	$("#resultadoPesquisa").html("");
+	inicioLista = $('<ul data-role="listview" class="ui-listview">');
+	$("#resultadoPesquisa").append(inicioLista);
+	
+	$.each(data, function(index, value){
+		itemStr	 = '<li><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">';
+		itemStr	+= value.ir.nome
+		itemStr	+= '</a></li>';
+		item = $(itemStr);
+		
+		if(index == 1){
+			item.addClass("ui-first-child");
+		}
+		if(index == data.length){
+			item.addClass("ui-last-child");
+		}
+		
+		inicioLista.append(item);
+	});
+	
+	//fimLista = $('</ul>');
+	$("#resultadoPesquisa").append(fimLista);
+}
+
+/* Objeto para obter e guardar localmente a lista de GFCMs
+ */
+var gfcmList = {
+	gfcms : {},
+	timeoutGfcm : null,
+	
+	/* Adiciona a lista de GFCMs no campo "select"
+	 */
+	listaGfcms : function(data, page = ''){
+					this.gfcms = data;
+					
+					clearTimeout(this.timeoutGfcm);
+					this.timeoutGfcm = setTimeout(function(){ 
+						this.gfcms = {};
+					}, 60000);
+					
+					if(page == ''){
+						obj = $("#selGfcm");
+					} else {
+						obj = $("#"+page).find("#selGfcm");
+					}
+					if(obj.length){
+						obj.html("");
+						$.each(data, function (index, value) {
+							obj.append('<option value="' + index + '">' + value + '</option>');
+						});
+					}
+				},
+	
+	/* Faz requisição ao servidor para obter a lista de GFCMs
+	 */
+	carregaGfcms : function(page = ''){
+						if(Object.keys(this.gfcms).length > 0){
+							gfcmList.listaGfcms(this.gfcms, page);
+							return;
+						}
+						
+						if(page != '') { page = 'page:' + page + '/' };
+						
+						$.ajax({
+							url			: defaultValues.urlServidor + '/Gfcms/list/' + page,
+							// url			: 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
+							// url			: 'http://www.fasfsadfsfsafas.mg.gov.br',
+							dataType	: 'jsonp',
+							success		: function(response){},
+							timeout		: defaultValues.timeoutDefault,
+							cache		: true,
+							statusCode	: statusCodeMessages,
+							jsonp		: 'listaGfcms',
+							tryCount	: defaultValues.tryCountDefault,
+							retryLimit	: defaultValues.retryLimitDefault,
+							beforeSend	: function(jqXHR, settings){
+											jsonpCallback = settings.jsonpCallback;
+											/*p1 = jqXHR;
+											p2 = settings;
+											jsonpCallback = getParameterByName(settings.jsonp, settings.url);
+											console.log('jsonpCallback: '+jsonpCallback)
+											settings.url = settings.url.replace(settings.jsonpCallback, settings.jsonp)
+											*/
+											settings.url = settings.url.replace(jsonpCallback, settings.jsonp)
+											urlArr = settings.url.split("?");
+											/* urlArr[1] = urlArr[1].replace("&", "/").replace("=", ":");
+											 eval("settings."+jsonpCallback+"=false;");
+											*/
+											urlArr[1] = urlArr[1].replace(new RegExp('&', 'g'), '/').replace(new RegExp('=', 'g'), ':');
+											settings.url = urlArr[0] + urlArr[1];
+											
+											defaultValues.loadingInProcess++;
+											$.mobile.loading('show');
+										},
+							complete	: function(){
+											defaultValues.loadingInProcess--;
+											if(defaultValues.loadingInProcess == 0){
+												$.mobile.loading('hide');
+											}
+										},
+							error		: function(jqXHR, textStatus, errorThrown){
+											myJqXHR = jqXHR;
+											if(jqXHR.statusText != "success"){
+												alert("Erro ao carregar a lista de GFCMs");
+											} 
+										}
+						});
+					}
+
+};
+					
+$(function(){
 	$("form").submit(function(ev){
 		ev.preventDefault();
-		
 		dados = $(this).serialize();
 		action = $(this).attr("action");
 		jsonpCallback = $(this).attr("data-jsonp");
 		
 		$.ajax({
 			type		: 'POST',
-			data		: dados,//{ "login" : "admin", "senha" : "conferencias" },
-			url			: urlServidor + action, 
+			data		: dados, // { "login" : "admin", "senha" : "conferencias" },
+			url			: defaultValues.urlServidor + action, 
 			dataType	: 'jsonp',
 			success		: function(response){},
-			timeout		: timeoutDefault,
+			timeout		: defaultValues.timeoutDefault,
 			cache		: false,
 			statusCode	: statusCodeMessages,
 			jsonp		: jsonpCallback,
-			tryCount	: tryCountDefault,
-			retryLimit	: retryLimitDefault,
+			tryCount	: defaultValues.tryCountDefault,
+			retryLimit	: defaultValues.retryLimitDefault,
 			beforeSend	: function(){
-							loadingInProcess++;
+							defaultValues.loadingInProcess++;
 							$.mobile.loading('show');
 						},
 			complete	: function(){
-							loadingInProcess--;
-							if(loadingInProcess == 0){
+							defaultValues.loadingInProcess--;
+							if(defaultValues.loadingInProcess == 0){
 								$.mobile.loading('hide');
 							}
 						},
 			error		: function(jqXHR, strError, txt){
 							
-							//$("#teste").append("\n<br>jqXHR: "+jqXHR);
-							//$("#teste").append("\n<br>jqXHR.statusText: "+jqXHR.statusText);
-							//$("#teste").append("\n<br>strError: "+strError);
-							//$("#teste").append("\n<br>txt: "+txt);
+							// $("#teste").append("\n<br>jqXHR: "+jqXHR);
+							// $("#teste").append("\n<br>jqXHR.statusText: "+jqXHR.statusText);
+							// $("#teste").append("\n<br>strError: "+strError);
+							// $("#teste").append("\n<br>txt: "+txt);
 							
 							if(jqXHR.statusText != "success"){
-								showMessage("Erro de autenticacao", 2000);
+								alert("Erro de autenticacao");
 							} 
-							//{
+							// {
 							//	$("#teste").append("\n<br>Erro na autenticação com retorno success");
-							//}
+							// }
 						}
+		
 		});
-
+		
+		
+		
+		
 	});
 	
 	$(".btnSair").each(function(){
 		$(this).on("click", function(){
 			$.ajax({
-				url			: urlServidor + '/app/logout',
+				url			: defaultValues.urlServidor + '/app/logout',
 				dataType	: 'jsonp',
 				success		: function(response){},
-				timeout		: timeoutDefault,
+				timeout		: defaultValues.timeoutDefault,
 				cache		: false,
 				statusCode	: statusCodeMessages,
 				jsonp		: 'sair',
-				tryCount	: tryCountDefault,
-				retryLimit	: retryLimitDefault,
+				tryCount	: defaultValues.tryCountDefault,
+				retryLimit	: defaultValues.retryLimitDefault,
 				beforeSend	: function(){
-								loadingInProcess++;
+								defaultValues.loadingInProcess++;
 								$.mobile.loading('show');
 							},
 				complete	: function(){
-								loadingInProcess--;
-								if(loadingInProcess == 0){
+								defaultValues.loadingInProcess--;
+								if(defaultValues.loadingInProcess == 0){
 									$.mobile.loading('hide');
 								}
 							},
 				error		: function(jqXHR, textStatus, errorThrown){
 								if(jqXHR.statusText != "success"){
-									showMessage("Erro ao encerrar a sessão.", 2000);
+									alert("Erro ao encerrar a sessão.");
 								} 
 							}
 			});
@@ -397,43 +484,23 @@ $(function(){
 	
 });
 	
-	
 $(document).on('pageshow',function(){
-	currPage = $.mobile.activePage.attr("id");
-
-	if(currPage != 'pageLogin'){
-		$.ajax({
-			url			: urlServidor + '/app/isLogged',
-			dataType	: 'jsonp',
-			success		: function(response){},
-			timeout		: timeoutDefault,
-			cache		: false,
-			statusCode	: statusCodeMessages,
-			jsonp		: 'verificaSessao',
-			tryCount	: tryCountDefault,
-			retryLimit	: retryLimitDefault,
-			beforeSend	: function(){
-							loadingInProcess++;
-							$.mobile.loading('show');
-						},
-			complete	: function(){
-							loadingInProcess--;
-							if(loadingInProcess == 0){
-								$.mobile.loading('hide');
-							}
-						},
-			error		: function(jqXHR, textStatus, errorThrown){
-							if(jqXHR.statusText != "success"){
-								showMessage("Erro ao validar autenticação de usuário.", 2000);
-							} 
-						}
+	defaultValues.currPage = $.mobile.activePage.attr("id");
+	
+	if(defaultValues.currPage != 'pageLogin'){
+		sessao.validaSessao();
+	}
+	
+	if($('div.ui-content').find("#selGfcm").length){
+		sessao.getAutenticado(function(autenticado){
+			if(autenticado == 1){
+				gfcmList.carregaGfcms(defaultValues.currPage);
+			}
 		});
 	}
 	
-	if(currPage == 'pageNovoIrmao'){
-		//$('#dataNascimento').datepicker();
-		$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
-	}
+	// $('#dataNascimento').datepicker();
+	$('.cpf').mask('000.000.000-00', {placeholder: "___.___.___-__"});
 });
 
 app.initialize();
