@@ -240,8 +240,8 @@ statusCodeMessages = {
 /* Valores padrão 
  */
 var defaultValues = {
-	 urlServidor : 'http://127.0.0.1/conferencias',
-	//urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
+	 // urlServidor : 'http://127.0.0.1/conferencias',
+	urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
 	// urlServidor : 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
 	timeoutDefault : 10000,
 	tryCountDefault : 0,
