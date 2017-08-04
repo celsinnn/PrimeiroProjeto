@@ -5,9 +5,9 @@
 	<title>Cadastro Igreja em BH</title>
 
 	<link href="jquery-mobile/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css">
-	<link href="css/index.css" rel="stylesheet" type="text/css">
 	<link href="jquery-mobile/jquery.mobile.datepicker.css" rel="stylesheet" type="text/css">
 	<!--link href="jquery-mobile/jquery-ui.min.css" rel="stylesheet" type="text/css"-->
+	<link href="css/index.css" rel="stylesheet" type="text/css">
 	
 	<script src="jquery-mobile/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
@@ -20,19 +20,51 @@
 	
 </head>
 <body>
-
 	<div data-role="page" id="pageInicio">
-		<div data-role="header">
+		<div data-role="header" data-position="fixed">
 			<div data-role="navbar" data-iconpos="left">
 				<ul>
-					<li><a href="#pageInicio" data-icon="home" class="ui-btn-active  ui-state-persist" id="btnInicio">Início</a></li>
+					<li><a href="#pagePesquisa" data-icon="home" id="btnInicio">Início</a></li>
 					<li><a href="#pageNovoIrmao" data-icon="user" id="btnNovo">Novo</a></li>
 					<li><a data-icon="power" class="btnSair" id="btnSair">Sair</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
-			<div data-role="popup" id="mensagens" class="mensagens">
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<h1>Igreja em Belo Horizonte</h1>
+		</div>
+	</div>
+	
+	<div data-role="page" id="pagePesquisa">
+		<div data-role="header" data-position="fixed">
+			<div data-role="navbar" data-iconpos="left">
+				<ul>
+					<li><a href="#pagePesquisa" data-icon="home" class="ui-btn-active  ui-state-persist" id="btnInicio">Início</a></li>
+					<li><a href="#pageNovoIrmao" data-icon="user" id="btnNovo">Novo</a></li>
+					<li><a data-icon="power" class="btnSair" id="btnSair">Sair</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div>
+		<div data-role="content">
+			<div data-role="popup" id="statusCodeMessages" class="statusCodeMessages">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem"></p>
+			</div>
+			<div data-role="popup" id="validaSessao" class="validaSessao">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			<div data-role="popup" id="carregaGfcms" class="carregaGfcms">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			<div data-role="popup" id="formMessage" class="formMessage">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			<div data-role="popup" id="btnSair" class="btnSair">
 			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 			  <p id="mensagem">Coloque a sua mensagem aqui</p>
 			</div>
@@ -61,24 +93,44 @@
 			<br />
 			<p id="resultadoPesquisa">
 			</p>
-			<br />
+			<p>&nbsp;</p>
 		</div>
-		<div data-role="footer">
-			<h4>&nbsp;</h4>
+		<div data-role="footer" data-position="fixed">
+			<h1>Igreja em Belo Horizonte</h1>
 		</div>
 	</div>
 
 	<div data-role="page" id="pageNovoIrmao">
-		<div data-role="header">
+		<div data-role="header" data-position="fixed">
 			<div data-role="navbar" data-iconpos="left">
 				<ul>
-					<li><a href="#pageInicio" data-icon="home" id="btnInicio">Início</a></li>
+					<li><a href="#pagePesquisa" data-icon="home" id="btnInicio">Início</a></li>
 					<li><a href="#pageNovoIrmao" data-icon="user" class="ui-btn-active  ui-state-persist" id="btnNovo">Novo</a></li>
 					<li><a data-icon="power" class="btnSair" id="btnSair">Sair</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
+			<div data-role="popup" id="statusCodeMessages" class="statusCodeMessages">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem"></p>
+			</div>
+			<div data-role="popup" id="validaSessao" class="validaSessao">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			<div data-role="popup" id="carregaGfcms" class="carregaGfcms">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			<div data-role="popup" id="formMessage" class="formMessage">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
+			<div data-role="popup" id="btnSair" class="btnSair">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
 		
 				<label for="text-basic">Nome:</label>
 				<input name="text-basic" id="text-basic" value="" type="text">
@@ -99,16 +151,28 @@
 				</div>		
 			<!--input data-role="date" data-inline="true" type="text" id="dataNascimento"-->
 		</div>
-		<div data-role="footer">
-			<h4><!--RODAPE--></h4>
+		<div data-role="footer" data-position="fixed">
+			<h1>Igreja em Belo Horizonte</h1>
 		</div>
 	</div>
 	
 	<div data-role="page" id="pageLogin">
-		<div data-role="header">
+		<div data-role="header" data-position="fixed">
 			<h2>Login</h2>
 		</div>
 		<div data-role="content">
+			<div data-role="popup" id="verificaAutenticacao" class="verificaAutenticacao">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Usuário e senha não conferem.</p>
+			</div>
+			<div data-role="popup" id="statusCodeMessages" class="statusCodeMessages">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem"></p>
+			</div>
+			<div data-role="popup" id="formMessage" class="formMessage">
+			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			  <p id="mensagem">Coloque a sua mensagem aqui</p>
+			</div>
 			
 			<div data-role="popup" id="mensagens" class="mensagens">
 			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
@@ -130,10 +194,9 @@
 			</div>
 						
 		</div>
-		<div data-role="footer">
+		<div data-role="footer" data-position="fixed">
+			<h1>Igreja em Belo Horizonte</h1>
 		</div>
 	</div>
-	
-	
 </body>
 </html>
