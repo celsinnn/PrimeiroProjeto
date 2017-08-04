@@ -240,7 +240,7 @@ statusCodeMessages = {
 /* Valores padrão 
  */
 var defaultValues = {
-	 // urlServidor : 'http://127.0.0.1/conferencias',
+	// urlServidor : 'http://127.0.0.1/conferencias',
 	urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
 	// urlServidor : 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
 	timeoutDefault : 10000,
@@ -337,33 +337,41 @@ sessao = {
 			}
 };
 
-dataTeste = {};
-function pesquisaIrmaos(data){
-	dataTeste = data;
+
+/* Objeto para registrar e guardar localmente a lista de irmãos pesquisados
+ */
+irmaos = {
+	lista: {},
+	selecionado: null,
 	
-	$("#resultadoPesquisa").html("");
-	inicioLista = $('<ul data-role="listview" class="ui-listview">');
-	$("#resultadoPesquisa").append(inicioLista);
-	
-	$.each(data, function(index, value){
-		itemStr	 = '<li><a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">';
-		itemStr	+= value.ir.nome
-		itemStr	+= '</a></li>';
-		item = $(itemStr);
-		
-		if(index == 1){
-			item.addClass("ui-first-child");
-		}
-		if(index == data.length){
-			item.addClass("ui-last-child");
-		}
-		
-		inicioLista.append(item);
-	});
-	
-	//fimLista = $('</ul>');
-	$("#resultadoPesquisa").append(fimLista);
+	pesquisaIrmaos:	function(data){
+						this.lista = data;
+						container = $("#listaIrmaos");
+						container.html("");
+						
+						$.each(data, function(index, value){
+							div = $('<div data-role="collapsible">');
+							h3 = $('<h3>');
+							p = $('<p>');
+							
+							h3.html(value.ir.nome);
+							p.append("<b>RG:</b> " + irmaos.lista[0].ir.rg + " / ");
+							p.append("<b>CPF:</b> " + irmaos.lista[0].ir.cpf + " / ");
+							p.append("<b>Data de Nascimento:</b> " + irmaos.lista[0].ir.data_nascimento + "<br />");
+							p.append("<b>Estado Civil:</b> " + irmaos.lista[0].ec.estado_civil + " / ");
+							p.append("<b>Estado Civil:</b> " + irmaos.lista[0].ec.estado_civil + " / ");
+							p.append("<b>GFCM:</b> " + irmaos.lista[0].gf.nome);
+							
+							div.append(h3);
+							div.append(p);
+							container.append(div);
+						});
+						
+						container.collapsibleset( "refresh" );
+						//this.addEvento();
+					},
 }
+					
 
 /* Objeto para obter e guardar localmente a lista de GFCMs
  */
@@ -387,7 +395,11 @@ var gfcmList = {
 						obj = $("#"+page).find("#selGfcm");
 					}
 					if(obj.length){
+						if(obj.find('[value=""]').length > 0){
+							vazio = obj.find('[value=""]').clone();
+						}
 						obj.html("");
+						obj.append(vazio);
 						$.each(data, function (index, value) {
 							obj.append('<option value="' + index + '">' + value + '</option>');
 						});
@@ -451,7 +463,7 @@ var gfcmList = {
 					}
 
 };
-					
+				
 $(function(){
 	$("form").submit(function(ev){
 		ev.preventDefault();
