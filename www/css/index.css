@@ -130,3 +130,7 @@ body{
 	margin-left: 5%;
 	margin-right: 5%;
 }
+
+input, textarea{
+	font-size: 2em;
+}
