@@ -28,168 +28,220 @@ var app = {
 //statusCodeMessages = {};
 statusCodeMessages = {
 						400: function() {
-								alert("Requisição inválida");
+								$("#statusCodeMessages").find("#mensagem").html("Requisição inválida");
+								$("#statusCodeMessages").popup("open");
 							},
 						401: function() {
-								alert("Não autorizado");
+								$("#statusCodeMessages").find("#mensagem").html("Não autorizado");
+								$("#statusCodeMessages").popup("open");
 							},
 						402: function() {
-								alert("Pagamento necessário");
+								$("#statusCodeMessages").find("#mensagem").html("Pagamento necessário");
+								$("#statusCodeMessages").popup("open");
 							},
 						403: function() {
-								alert("Proibido");
+								$("#statusCodeMessages").find("#mensagem").html("Proibido");
+								$("#statusCodeMessages").popup("open");
 							},
 						404: function() {
-								alert("Não encontrado");
+								$("#statusCodeMessages").find("#mensagem").html("Não encontrado");
+								$("#statusCodeMessages").popup("open");
 							},
 						405: function() {
-								alert("Método não permitido");
+								$("#statusCodeMessages").find("#mensagem").html("Método não permitido");
+								$("#statusCodeMessages").popup("open");
 							},
 						406: function() {
-								alert("Não Aceitável");
+								$("#statusCodeMessages").find("#mensagem").html("Não Aceitável");
+								$("#statusCodeMessages").popup("open");
 							},
 						407: function() {
-								alert("Autenticação de proxy necessária");
+								$("#statusCodeMessages").find("#mensagem").html("Autenticação de proxy necessária");
+								$("#statusCodeMessages").popup("open");
 							},
 						408: function() {
-								alert("Tempo de requisição esgotou (Timeout)");
+								$("#statusCodeMessages").find("#mensagem").html("Tempo de requisição esgotou (Timeout)");
+								$("#statusCodeMessages").popup("open");
 							},
 						409: function() {
-								alert("Conflito");
+								$("#statusCodeMessages").find("#mensagem").html("Conflito");
+								$("#statusCodeMessages").popup("open");
 							},
 						410: function() {
-								alert("Gone");
+								$("#statusCodeMessages").find("#mensagem").html("Gone");
+								$("#statusCodeMessages").popup("open");
 							},
 						411: function() {
-								alert("comprimento necessário");
+								$("#statusCodeMessages").find("#mensagem").html("comprimento necessário");
+								$("#statusCodeMessages").popup("open");
 							},
 						412: function() {
-								alert("Pré-condição falhou");
+								$("#statusCodeMessages").find("#mensagem").html("Pré-condição falhou");
+								$("#statusCodeMessages").popup("open");
 							},
 						413: function() {
-								alert("Entidade de solicitação muito grande");
+								$("#statusCodeMessages").find("#mensagem").html("Entidade de solicitação muito grande");
+								$("#statusCodeMessages").popup("open");
 							},
 						414 : function() {
-								alert("Pedido-URI Too Long");
+								$("#statusCodeMessages").find("#mensagem").html("Pedido-URI Too Long");
+								$("#statusCodeMessages").popup("open");
 							},
 						415: function() {
-								alert("Tipo de mídia não suportado");
+								$("#statusCodeMessages").find("#mensagem").html("Tipo de mídia não suportado");
+								$("#statusCodeMessages").popup("open");
 							},
 						416: function() {
-								alert("Solicitada de Faixa Não Satisfatória");
+								$("#statusCodeMessages").find("#mensagem").html("Solicitada de Faixa Não Satisfatória");
+								$("#statusCodeMessages").popup("open");
 							},
 						417: function() {
-								alert("Falha na expectativa");
+								$("#statusCodeMessages").find("#mensagem").html("Falha na expectativa");
+								$("#statusCodeMessages").popup("open");
 							},
 						418: function() {
-								alert("Eu sou um bule de chá");
+								$("#statusCodeMessages").find("#mensagem").html("Eu sou um bule de chá");
+								$("#statusCodeMessages").popup("open");
 							},
 						422: function() {
-								alert("Entidade improcessável (WebDAV)");
+								$("#statusCodeMessages").find("#mensagem").html("Entidade improcessável (WebDAV)");
+								$("#statusCodeMessages").popup("open");
 							},
 						423: function() {
-								alert("Fechado (WebDAV)");
+								$("#statusCodeMessages").find("#mensagem").html("Fechado (WebDAV)");
+								$("#statusCodeMessages").popup("open");
 							},
 						424: function() {
-								alert("Falha de Dependência (WebDAV)");
+								$("#statusCodeMessages").find("#mensagem").html("Falha de Dependência (WebDAV)");
+								$("#statusCodeMessages").popup("open");
 							},
 						425: function() {
-								alert("coleção não ordenada");
+								$("#statusCodeMessages").find("#mensagem").html("coleção não ordenada");
+								$("#statusCodeMessages").popup("open");
 							},
 						426: function() {
-								alert("Upgrade Obrigatório");
+								$("#statusCodeMessages").find("#mensagem").html("Upgrade Obrigatório");
+								$("#statusCodeMessages").popup("open");
 							},
 						450: function() {
-								alert("bloqueados pelo Controle de Pais do Windows");
+								$("#statusCodeMessages").find("#mensagem").html("bloqueados pelo Controle de Pais do Windows");
+								$("#statusCodeMessages").popup("open");
 							},
 						499: function() {
-								alert("cliente fechou Pedido (utilizado em ERPs/VPSA)");
+								$("#statusCodeMessages").find("#mensagem").html("cliente fechou Pedido (utilizado em ERPs/VPSA)");
+								$("#statusCodeMessages").popup("open");
 							},
 						500: function() {
-								alert("Erro interno do servidor (Internal Server Error)");
+								$("#statusCodeMessages").find("#mensagem").html("Erro interno do servidor (Internal Server Error)");
+								$("#statusCodeMessages").popup("open");
 							},
 						501: function() {
-								alert("Não implementado (Not implemented)");
+								$("#statusCodeMessages").find("#mensagem").html("Não implementado (Not implemented)");
+								$("#statusCodeMessages").popup("open");
 							},
 						502: function() {
-								alert("Bad Gateway");
+								$("#statusCodeMessages").find("#mensagem").html("Bad Gateway");
+								$("#statusCodeMessages").popup("open");
 							},
 						503: function() {
-								alert("Serviço indisponível (Service Unavailable)");
+								$("#statusCodeMessages").find("#mensagem").html("Serviço indisponível (Service Unavailable)");
+								$("#statusCodeMessages").popup("open");
 							},
 						504: function() {
-								alert("Gateway Time-Out");
+								$("#statusCodeMessages").find("#mensagem").html("Gateway Time-Out");
+								$("#statusCodeMessages").popup("open");
 							},
 						505: function() {
-								alert("HTTP Version not supported");
+								$("#statusCodeMessages").find("#mensagem").html("HTTP Version not supported");
+								$("#statusCodeMessages").popup("open");
 							},
 						300: function() {
-								alert("Múltipla escolha");
+								$("#statusCodeMessages").find("#mensagem").html("Múltipla escolha");
+								$("#statusCodeMessages").popup("open");
 							},
 						301: function() {
-								alert("Movido");
+								$("#statusCodeMessages").find("#mensagem").html("Movido");
+								$("#statusCodeMessages").popup("open");
 							},
 						302: function() {
-								alert("Encontrado");
+								$("#statusCodeMessages").find("#mensagem").html("Encontrado");
+								$("#statusCodeMessages").popup("open");
 							},
 						404: function() {
-								alert("");
+								$("#statusCodeMessages").find("#mensagem").html("");
+								$("#statusCodeMessages").popup("open");
 							},
 						304: function() {
-								alert("Não modificado");
+								$("#statusCodeMessages").find("#mensagem").html("Não modificado");
+								$("#statusCodeMessages").popup("open");
 							},
 						305: function() {
-								alert("Use Proxy (desde HTTP/1.1)");
+								$("#statusCodeMessages").find("#mensagem").html("Use Proxy (desde HTTP/1.1)");
+								$("#statusCodeMessages").popup("open");
 							},
 						306: function() {
-								alert("Proxy Switch");
+								$("#statusCodeMessages").find("#mensagem").html("Proxy Switch");
+								$("#statusCodeMessages").popup("open");
 							},
 						307: function() {
-								alert("Redirecionamento temporário (desde HTTP/1.1)");
+								$("#statusCodeMessages").find("#mensagem").html("Redirecionamento temporário (desde HTTP/1.1)");
+								$("#statusCodeMessages").popup("open");
 							},
 						/*200: function() {
-								alert("OK");
+								$("#statusCodeMessages").find("#mensagem").html("OK");
+								$("#statusCodeMessages").popup("open");
 							},*/
 						201: function() {
-								alert("Criado");
+								$("#statusCodeMessages").find("#mensagem").html("Criado");
+								$("#statusCodeMessages").popup("open");
 							},
 						202 : function() {
-								alert("Aceito");
+								$("#statusCodeMessages").find("#mensagem").html("Aceito");
+								$("#statusCodeMessages").popup("open");
 							},
 						203: function() {
-								alert("não-autorizado (desde HTTP/1.1)");
+								$("#statusCodeMessages").find("#mensagem").html("não-autorizado (desde HTTP/1.1)");
+								$("#statusCodeMessages").popup("open");
 							},
 						204: function() {
-								alert("Nenhum conteúdo");
+								$("#statusCodeMessages").find("#mensagem").html("Nenhum conteúdo");
+								$("#statusCodeMessages").popup("open");
 							},
 						205: function() {
-								alert("Reset");
+								$("#statusCodeMessages").find("#mensagem").html("Reset");
+								$("#statusCodeMessages").popup("open");
 							},
 						206: function() {
-								alert("Conteúdo parcial");
+								$("#statusCodeMessages").find("#mensagem").html("Conteúdo parcial");
+								$("#statusCodeMessages").popup("open");
 							},
 						207: function() {
-								alert("Status Multi (WebDAV)");
+								$("#statusCodeMessages").find("#mensagem").html("Status Multi (WebDAV)");
+								$("#statusCodeMessages").popup("open");
 							},
 						100: function() {
-								alert("Continuar");
+								$("#statusCodeMessages").find("#mensagem").html("Continuar");
+								$("#statusCodeMessages").popup("open");
 							},
 						101: function() {
-								alert("Mudando protocolos");
+								$("#statusCodeMessages").find("#mensagem").html("Mudando protocolos");
+								$("#statusCodeMessages").popup("open");
 							},
 						102: function() {
-								alert("Processamento (WebDAV)");
+								$("#statusCodeMessages").find("#mensagem").html("Processamento (WebDAV)");
+								$("#statusCodeMessages").popup("open");
 							},
 						122: function() {
-								alert("Pedido-URI muito longo");
+								$("#statusCodeMessages").find("#mensagem").html("Pedido-URI muito longo");
+								$("#statusCodeMessages").popup("open");
 							}
 					};
 
 /* Valores padrão 
  */
 var defaultValues = {
-	// urlServidor : 'http://127.0.0.1/conferencias',
-	urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
+	 urlServidor : 'http://127.0.0.1/conferencias',
+	//urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
 	// urlServidor : 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
 	timeoutDefault : 10000,
 	tryCountDefault : 0,
@@ -220,10 +272,10 @@ sessao = {
 	verificaAutenticacao: function(data){
 							if(data.success == 1){
 								this.autenticado = 1;
-								window.location.href="index.html";
+								window.location.href="index.html#pageInicio";
 							} else {
 								this.autenticado = 0;
-								alert("Usuário e senha não conferem.");
+								$("#verificaAutenticacao").popup("open");
 							}
 						},
 	
@@ -272,7 +324,7 @@ sessao = {
 									},
 						error		: function(jqXHR, textStatus, errorThrown){
 										if(jqXHR.statusText != "success"){
-											alert("Erro ao validar autenticação de usuário.");
+											$("#validaSessao").popup("open");
 										} 
 										this.verificacaoEmAndamento = 0;
 									}
@@ -392,7 +444,7 @@ var gfcmList = {
 							error		: function(jqXHR, textStatus, errorThrown){
 											myJqXHR = jqXHR;
 											if(jqXHR.statusText != "success"){
-												alert("Erro ao carregar a lista de GFCMs");
+												$("#carregaGfcms").popup("open");
 											} 
 										}
 						});
@@ -437,7 +489,7 @@ $(function(){
 							// $("#teste").append("\n<br>txt: "+txt);
 							
 							if(jqXHR.statusText != "success"){
-								alert("Erro de autenticacao");
+								$("#formMessage").popup("open");
 							} 
 							// {
 							//	$("#teste").append("\n<br>Erro na autenticação com retorno success");
@@ -475,7 +527,7 @@ $(function(){
 							},
 				error		: function(jqXHR, textStatus, errorThrown){
 								if(jqXHR.statusText != "success"){
-									alert("Erro ao encerrar a sessão.");
+									$("#btnSair").popup("open");
 								} 
 							}
 			});
