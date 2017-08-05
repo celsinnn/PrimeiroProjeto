@@ -466,6 +466,8 @@ var gfcmList = {
 $(function(){
 	$("form").submit(function(ev){
 		ev.preventDefault();
+		ev.stopPropagation();
+		
 		dados = $(this).serialize();
 		action = $(this).attr("action");
 		jsonpCallback = $(this).attr("data-jsonp");
