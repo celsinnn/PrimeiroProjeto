@@ -355,12 +355,11 @@ irmaos = {
 							p = $('<p>');
 							
 							h3.html(value.ir.nome);
-							p.append("<b>RG:</b> " + irmaos.lista[0].ir.rg + " / ");
-							p.append("<b>CPF:</b> " + irmaos.lista[0].ir.cpf + " / ");
-							p.append("<b>Data de Nascimento:</b> " + irmaos.lista[0].ir.data_nascimento + "<br />");
-							p.append("<b>Estado Civil:</b> " + irmaos.lista[0].ec.estado_civil + " / ");
-							p.append("<b>Estado Civil:</b> " + irmaos.lista[0].ec.estado_civil + " / ");
-							p.append("<b>GFCM:</b> " + irmaos.lista[0].gf.nome);
+							p.append("<b>RG:</b> " + value.ir.rg + " / ");
+							p.append("<b>CPF:</b> " + value.ir.cpf + " / ");
+							p.append("<b>Data de Nascimento:</b> " + value.ir.data_nascimento + "<br />");
+							p.append("<b>Estado Civil:</b> " + value.ec.estado_civil + " / ");
+							p.append("<b>GFCM:</b> " + value.gf.nome);
 							
 							div.append(h3);
 							div.append(p);
