@@ -237,11 +237,23 @@ statusCodeMessages = {
 							}
 					};
 
+function showMessage(msg){
+	selector	= '<div data-role="popup" id="formMessage" class="formMessage">'
+				+ '<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" '
+				+ 'class="ui-btn-right ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-shadow ui-corner-all" role="button">'
+				+ 'Close</a><p id="mensagem">'
+				+ msg
+				+ '</p></div>';
+	elem = $(selector);
+	elem.popup();
+	elem.popup("open");
+};
+					
 /* Valores padrão 
  */
 var defaultValues = {
-	// urlServidor : 'http://127.0.0.1/conferencias',
-	urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
+	urlServidor : 'http://127.0.0.1/conferencias',
+	// urlServidor : 'http://inscricaoconferenciabh.000webhostapp.com',
 	// urlServidor : 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
 	timeoutDefault : 10000,
 	tryCountDefault : 0,
@@ -255,6 +267,7 @@ var defaultValues = {
 sessao = {
 	autenticado: 0,
 	verificacaoEmAndamento: 0, // define se há "verificaSessao" ( =1 enquanto requisição não terminar)
+	myJqXHR: null,
 	
 	/* Obtém o valor de "autenticado", considerando que há "verificacaoEmAndamento"; Executa "callback" após a verificação.
 	 */
@@ -272,10 +285,15 @@ sessao = {
 	verificaAutenticacao: function(data){
 							if(data.success == 1){
 								this.autenticado = 1;
-								window.location.href="index.html#pageInicio";
+								console.log('redireciona pageInicio');
+								//window.location.href="index.html#pageInicio";
+								$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageInicio", { role: "dialog" } );
 							} else {
 								this.autenticado = 0;
-								$("#verificaAutenticacao").popup("open");
+								console.log('open 1');
+								console.log(defaultValues.currPage);
+								//$("#verificaAutenticacao").popup("open");
+								showMessage("Usuário e senha incorretos.");
 							}
 						},
 	
@@ -287,7 +305,8 @@ sessao = {
 							this.autenticado = 1;
 						} else {
 							this.autenticado = 0;
-							window.location.href="index.html#pageLogin";
+							//window.location.href="index.html#pageLogin";
+							$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin", { role: "dialog" } );
 						}
 					},
 	
@@ -323,8 +342,12 @@ sessao = {
 										this.verificacaoEmAndamento = 0;
 									},
 						error		: function(jqXHR, textStatus, errorThrown){
-										if(jqXHR.statusText != "success"){
-											$("#validaSessao").popup("open");
+										sessao.myJqXHR = jqXHR;
+										if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
+											console.log('open 2');
+											console.log(defaultValues.currPage);
+											//$("#validaSessao").popup("open");
+											showMessage("Erro ao validar sessão.");
 										} 
 										this.verificacaoEmAndamento = 0;
 									}
@@ -333,10 +356,10 @@ sessao = {
 	
 	sair: function (){
 				this.autenticado = 0;
-				window.location.href="index.html#pageLogin";
+				//window.location.href="index.html#pageLogin";
+				$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin", { role: "dialog" } );
 			}
 };
-
 
 /* Objeto para registrar e guardar localmente a lista de irmãos pesquisados
  */
@@ -370,7 +393,6 @@ irmaos = {
 						//this.addEvento();
 					},
 }
-					
 
 /* Objeto para obter e guardar localmente a lista de GFCMs
  */
@@ -454,8 +476,11 @@ var gfcmList = {
 										},
 							error		: function(jqXHR, textStatus, errorThrown){
 											myJqXHR = jqXHR;
-											if(jqXHR.statusText != "success"){
-												$("#carregaGfcms").popup("open");
+											if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
+												console.log('open 3');
+												console.log(defaultValues.currPage);
+												//$("#carregaGfcms").popup("open");
+												showMessage("Erro ao carregar lista de GFCMs.");
 											} 
 										}
 						});
@@ -501,8 +526,11 @@ $(function(){
 							// $("#teste").append("\n<br>strError: "+strError);
 							// $("#teste").append("\n<br>txt: "+txt);
 							
-							if(jqXHR.statusText != "success"){
-								$("#formMessage").popup("open");
+							if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
+								console.log('open 4');
+								console.log(defaultValues.currPage);
+								//$("#formMessage").popup("open");
+								showMessage("Erro ao enviar dados do formulário.");
 							} 
 							// {
 							//	$("#teste").append("\n<br>Erro na autenticação com retorno success");
@@ -539,8 +567,12 @@ $(function(){
 								}
 							},
 				error		: function(jqXHR, textStatus, errorThrown){
-								if(jqXHR.statusText != "success"){
-									$("#btnSair").popup("open");
+								if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
+									console.log('open 5');
+									console.log(defaultValues.currPage);
+									console.log(defaultValues.currPage);
+									//$("#msgSaida").popup("open");
+									showMessage("Erro ao registrar saída. Por favor, tente novamente.");
 								} 
 							}
 			});
