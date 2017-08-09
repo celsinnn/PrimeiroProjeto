@@ -18,10 +18,14 @@
 
 	
 	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/default.js"></script>
+	<script type="text/javascript" src="js/cookie.js"></script>
+	<script type="text/javascript" src="js/session.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 	
 </head>
 <body>
+
 	<div data-role="page" id="pageInicio">
 		<div data-role="header" data-position="fixed">
 			<div data-role="navbar" data-iconpos="left">
@@ -33,14 +37,7 @@
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
-			<div data-role="popup" id="formMessage" class="formMessage">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right ui-link ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-shadow ui-corner-all" role="button">Close</a>
-			  <p id="mensagem">Houve um erro ao tentar oconectar-se com o serviço de informações. Tente novamente.</p>
-			</div>
-			<div data-role="popup" id="msgSaida" class="msgSaida">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Coloque a sua mensagem aqui</p>
-			</div>
+			
 		</div>
 		<div data-role="footer" data-position="fixed">
 			<h1>Igreja em Belo Horizonte</h1>
@@ -58,23 +55,6 @@
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
-			<div data-role="popup" id="statusCodeMessages" class="statusCodeMessages">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem"></p>
-			</div>
-			<div data-role="popup" id="validaSessao" class="validaSessao">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Coloque a sua mensagem aqui</p>
-			</div>
-			<div data-role="popup" id="carregaGfcms" class="carregaGfcms">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Coloque a sua mensagem aqui</p>
-			</div>
-			<div data-role="popup" id="formMessage" class="formMessage">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Coloque a sua mensagem aqui</p>
-			</div>
-			
 			<p>
 				<form action="/irmaos/pesquisa" data-jsonp="pesquisaIrmaos" id="formPesquisaIrmaos">
 					<label for="nome">Nome:</label>
@@ -107,6 +87,24 @@
 		</div>
 	</div>
 
+	<div data-role="page" id="pageTimeout">
+		<div data-role="header" data-position="fixed">
+			<h2>Sessão Terminando</h2>
+		</div>
+		<div data-role="content">
+
+	        <p>Por motivo de segurança, sua sessão será finalizada em <span id="contSessao">0</span> minutos.</p>
+	        <h3 class="ui-title">Clique em "Continuar" para manter sua sessão por mais 10 minutos ou em "Sair" para encerrar sua sessão.</h3>
+						
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<center>
+				<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="btnContinuar" data-rel="back" style="width: 30%;">Continuar</a>
+		        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" id="btnSair" style="width: 30%;">Sair</a>
+			</center>
+		</div>
+	</div>
+	
 	<div data-role="page" id="pageIrmao">
 		<div data-role="header" data-position="fixed">
 			<div data-role="navbar" data-iconpos="left">
@@ -118,6 +116,13 @@
 			</div><!-- /navbar -->
 		</div>
 		<div data-role="content">
+		
+		
+		
+
+			
+
+		
 		
 			<div data-role="collapsible-set" id="listaIrmaos">
 			 
@@ -162,23 +167,6 @@
 			<h2>Login</h2>
 		</div>
 		<div data-role="content">
-			<div data-role="popup" id="verificaAutenticacao" class="verificaAutenticacao">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Usuário e senha não conferem.</p>
-			</div>
-			<div data-role="popup" id="statusCodeMessages" class="statusCodeMessages">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem"></p>
-			</div>
-			<div data-role="popup" id="formMessage" class="formMessage">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Houve um erro ao tentar oconectar-se com o serviço de informações. Tente novamente.</p>
-			</div>
-			<div data-role="popup" id="msgSaida" class="msgSaida">
-			  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-			  <p id="mensagem">Coloque a sua mensagem aqui</p>
-			</div>
-			
 			<div class="divFormLogin">
 				<form id="formLogin" action="/app/login" data-jsonp="sessao.verificaAutenticacao">
 				
