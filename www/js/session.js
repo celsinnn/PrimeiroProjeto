@@ -34,13 +34,14 @@ sessao = {
 	/* Chamada após o "validaSessao", para verificar se o usuário está autenticado
 	 */
 	verificaSessao: function (data){
-						this.verificacaoEmAndamento = 0;
 						if(data.success == 1){
 							this.autenticado = 1;
 						} else {
 							this.autenticado = 0;
 							//window.location.href="index.html#pageLogin";
-							$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin", { role: "dialog" } );
+							/*pageContainer = $(":mobile-pagecontainer");
+							pageContainer.pagecontainer( "change", "index.html#pageLogin", { role: "dialog" } );*/
+							this.sair();
 						}
 					},
 	
@@ -73,7 +74,6 @@ sessao = {
 										if(defaultValues.loadingInProcess == 0){
 											$.mobile.loading('hide');
 										}
-										this.verificacaoEmAndamento = 0;
 									},
 						error		: function(jqXHR, textStatus, errorThrown){
 										sessao.myJqXHR = jqXHR;
@@ -81,7 +81,6 @@ sessao = {
 											//$("#validaSessao").popup("open");
 											showMessage("Erro ao validar sessão.");
 										} 
-										this.verificacaoEmAndamento = 0;
 									}
 					});
 				},
@@ -89,55 +88,54 @@ sessao = {
 	sair: function (){
 				this.autenticado = 0;
 				//window.location.href="index.html#pageLogin";
-				$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin", { role: "dialog" } );
+				activePage = $.mobile.activePage;
+				//$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin" );
+				$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin", {
+					role: "dialog",
+					changeHash: false
+				} );
 			}
 };
 
 timeoutSessao = {
 	intervSessao	: null,
+	intervAviso		: null,
 	minutos			: null,
 	//segundos		: null,
-	timeout			: 2,
-	minAviso		: 1,
-	inicializado	: false,
+	timeout			: 10,
+	minAviso		: 2,
+	//inicializado	: false,
 	
-	inicializa		: function(){
-						if(this.inicializado){
-							return false;
-						}
-						if(defaultValues.currPage == 'pageLogin'){
-							this.inicializado = false;
-							return false;
-						}
-						this.inicializado = true;
-						
-						console.log('inicializou objeto timeoutSessao');
+	finaliza		: function(){
 						clearInterval(this.intervSessao);
+						clearInterval(timeoutSessao.intervAviso);
 						this.minutos = this.timeout;
 						//this.segundos= this.timeout*60;
-						this.intervSessao = setInterval(function(){
-							console.log('executou intervalo intervSessao');
-							if(defaultValues.currPage == 'pageLogin'){
-								console.log('currPage == pageLogin');
-								timeoutSessao.inicializado = false;
-								timeoutSessao.minutos = timeoutSessao.timeout;
-								//timeoutSessao.segundos = timeoutSessao.timeout*60;
-								clearInterval(timeoutSessao.intervSessao);
-								//clearInterval(this);
-							}
-							//timeoutSessao.segundos--;
-							timeoutSessao.minutos--;
-							if(timeoutSessao.minutos == timeoutSessao.minAviso){
-								timeoutSessao.showMessageTimeout();
-								clearInterval(timeoutSessao.intervSessao);
-								//clearInterval(this);
-							}
-						}, 60000);
+					},
+	
+	inicializa		: function(){
+						this.finaliza();
+						
+						if($.mobile.activePage.attr('id') != 'pageTimeout'){
+							this.intervSessao = setInterval(function(){
+								/*timeoutSessao.segundos--;
+								if(timeoutSessao.segundos%60 == 59){
+									timeoutSessao.minutos--;
+								}*/
+								timeoutSessao.minutos--;
+								if(timeoutSessao.minutos == timeoutSessao.minAviso/* && timeoutSessao.segundos%60 == 0*/){
+									timeoutSessao.showMessageTimeout();
+									clearInterval(timeoutSessao.intervSessao);
+									clearInterval(this);
+								}
+							}, 1000);
+							
+						}
+						
 					},
 	
 	encerrar		: function(){
 							clearInterval(timeoutSessao.intervSessao);
-							console.log('chama ajax para registrar saida');
 							$.ajax({
 								url			: defaultValues.urlServidor + '/app/logout',
 								dataType	: 'jsonp',
@@ -165,7 +163,7 @@ timeoutSessao = {
 											}
 							});
 						
-							this.inicializado = false;
+							//this.inicializado = false;
 						},
 						
 	showMessageTimeout	: function(){
@@ -173,16 +171,10 @@ timeoutSessao = {
 								
 								min=this.minAviso;
 								seg=0;
-								var intervalo = setInterval(function(){
-									console.log('executou intervalo intervalo');
-									console.log('intervalo criado: ');
-									console.log(intervalo);
+								this.intervAviso = setInterval(function(){
 									if(seg == 0 && min == 0){
 										timeoutSessao.encerrar();
-										console.log('limpou intervalo (this)');
-										console.log('intervalo a ser limpo: ');
-										console.log(intervalo);
-										clearInterval(intervalo);
+										clearInterval(timeoutSessao.intervAviso);
 										clearInterval(this);
 									}
 
@@ -207,7 +199,6 @@ timeoutSessao = {
 								});
 								
 								$("#pageTimeout").find("#btnContinuar").click(function(ev){
-									timeoutSessao.inicializado = false;
 									timeoutSessao.inicializa();
 									return true;
 								});
@@ -215,8 +206,3 @@ timeoutSessao = {
 	
 	
 };
-						
-$( document ).ajaxComplete(function( ev, xhr, settings ) {
-	console.log('ao executar ajaxComplete, defaultValues.currPage = ' + defaultValues.currPage);
-	timeoutSessao.inicializa();
-});

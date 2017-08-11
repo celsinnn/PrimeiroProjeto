@@ -238,10 +238,12 @@ $(function(){
 	
 });
 
-$(document).on('pageshow',function(){
+	
+$(document).on('pagechange',function(){
 	defaultValues.currPage = $.mobile.activePage.attr("id");
 	
 	if(defaultValues.currPage != 'pageLogin'){
+		//debugger;
 		sessao.validaSessao();
 	}
 	
@@ -260,6 +262,13 @@ $(document).on('pageshow',function(){
 		// posterga a expiração da sessão para mais 10 minutos
 		setExpire("PHPSESSID", 10);
 	}
+	
+	if($.mobile.activePage.attr('id') != 'pageLogin'){
+		timeoutSessao.inicializa();
+	} else {
+		timeoutSessao.finaliza();
+	}
 });
+
 
 app.initialize();

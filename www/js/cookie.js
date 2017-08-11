@@ -26,5 +26,7 @@ function getCookie(name) {
 
 function setExpire(name, exMins = 1){
 	value = getCookie(name);
-	setCookie(name, value, exMins);
+	if(value !== false){
+		setCookie(name, value, exMins);
+	}
 }
