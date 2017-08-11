@@ -128,7 +128,7 @@ timeoutSessao = {
 									clearInterval(timeoutSessao.intervSessao);
 									clearInterval(this);
 								}
-							}, 1000);
+							}, 60000);
 							
 						}
 						
@@ -191,7 +191,7 @@ timeoutSessao = {
 									} else {
 										seg--;
 									}
-								}, 60000);
+								}, 1000);
 								
 								$("#pageTimeout").find("#btnSair").click(function(ev){
 									ev.preventDefault();
