@@ -191,7 +191,7 @@ timeoutSessao = {
 									} else {
 										seg--;
 									}
-								}, 1000);
+								}, 60000);
 								
 								$("#pageTimeout").find("#btnSair").click(function(ev){
 									ev.preventDefault();
