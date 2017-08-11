@@ -8,12 +8,17 @@ sessao = {
 	/* Obtém o valor de "autenticado", considerando que há "verificacaoEmAndamento"; Executa "callback" após a verificação.
 	 */
 	getAutenticado: function(callback){
-		var intervalo = setInterval(function(){
+		sessao.validaSessao(function(){
+			callback(sessao.autenticado);
+		});
+		
+		
+		/*var intervalo = setInterval(function(){
 			if(sessao.verificacaoEmAndamento == 0){
 				clearInterval(intervalo);
 				callback(sessao.autenticado);
 			}
-		}, 200);
+		}, 200);*/
 	},
 	
 	/* Se o usuário e senha digitado na tela de login estão corretos, registra a sessão localmente
@@ -47,7 +52,7 @@ sessao = {
 	
 	/* Faz requisição ao servidor para verificar se o usuário está autenticado
 	 */
-	validaSessao: function (){
+	validaSessao: function (callback){
 					this.verificacaoEmAndamento = 1;
 					$.ajax({
 						url			: defaultValues.urlServidor + '/app/isLogged/',
@@ -74,6 +79,7 @@ sessao = {
 										if(defaultValues.loadingInProcess == 0){
 											$.mobile.loading('hide');
 										}
+										callback();
 									},
 						error		: function(jqXHR, textStatus, errorThrown){
 										sessao.myJqXHR = jqXHR;
