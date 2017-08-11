@@ -14,10 +14,11 @@ function setCookie(name, value, exMins = 1){    //função universal para criar co
 function getCookie(name) {
 	var value = "; " + document.cookie;
 	var parts = value.split("; " + name + "=");
+	ret = null;
 	if (parts.length == 2){
 		ret = parts.pop().split(";").shift();
 	}
-	if(ret === undefined){
+	if(ret === null){
 		return false;
 	}
 	return ret;
