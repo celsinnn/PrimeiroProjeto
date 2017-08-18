@@ -141,3 +141,7 @@ body{
 	padding-right: 4px;
 	padding-bottom: 4px;
 }*/
+
+.formButtons div, .formButtons a{
+	width: 35%;
+}
