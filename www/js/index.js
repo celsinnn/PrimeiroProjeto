@@ -31,6 +31,87 @@ irmaos = {
 	lista: {},
 	selecionado: null,
 	
+	populaDadosPesquisa: function(value){
+		html = '';
+		
+		if(value.ir.rg == null) rg = '' 
+		else rg = value.ir.rg;
+		html += "<b>RG:</b> " + rg + "<br />";
+		
+		if(value.ir.cpf == null) {
+			cpf = '' 
+		} else {
+			cpf	= value.ir.cpf.substring(0,3) + '.'
+				+ value.ir.cpf.substring(3,6) + '.'
+				+ value.ir.cpf.substring(6,9) + '.'
+				+ value.ir.cpf.substring(9,11) + '.';
+		}
+		html += "<b>CPF:</b> " + cpf + "<br />";
+		
+		if(value.ir.data_nascimento == null) {
+			data_nascimento = '';
+		} else {
+			data_nascimento	= value.ir.data_nascimento.substring(8,10) + '/'
+							+ value.ir.data_nascimento.substring(5, 7) + '/'
+							+ value.ir.data_nascimento.substring(0, 4)
+		}
+		html += "<b>Data de Nascimento:</b> " + data_nascimento + "<br />";
+		
+		if(value.ec.estado_civil == null) estado_civil = '' 
+		else estado_civil = value.ec.estado_civil;
+		html += "<b>Estado Civil:</b> " + estado_civil + "<br />";
+		
+		html += "<b>GFCM:</b> " + value.gf.nome;
+		
+		return html;
+	},
+	
+	editIrmaoSelecionado : function(){
+		$("#"+defaultValues.currPage).find("#id").val(this.lista[this.selecionado].ir.id);
+		$("#"+defaultValues.currPage).find("#nome").val(this.lista[this.selecionado].ir.nome);
+		$("#"+defaultValues.currPage).find("#cpf").val(this.lista[this.selecionado].ir.cpf);
+		$("#"+defaultValues.currPage).find("#data_nascimento").val(this.lista[this.selecionado].ir.data_nascimento);
+		
+		gfcmList.carregaGfcms(function(){
+			
+			
+			esperaAtribuicao = setInterval(function(){
+				idSel = irmaos.lista[irmaos.selecionado].gf.id;
+				
+				htmlIdSel = $("#"+defaultValues.currPage).find("#selGfcm").find('[value="' + idSel + '"]').html()
+				if(htmlIdSel === undefined){
+					clearInterval(esperaAtribuicao);
+				} 
+				
+				
+				$("#"+defaultValues.currPage).find("#selGfcm").val(idSel);//irmaos.lista[irmaos.selecionado].gf.id
+				$("#"+defaultValues.currPage).find("#selGfcm").selectmenu('refresh');
+				
+				if($("#"+defaultValues.currPage).find("#selGfcm").val() === idSel){
+					clearInterval(esperaAtribuicao);
+				}
+			}, 100);
+			
+			
+		});
+		
+		/*esperaListaGfcm = setInterval(function(){
+			if(gfcmList.listaCarregada){
+				clearInterval(esperaListaGfcm);
+			}
+		}, 2000);*/
+		
+	},
+	
+	verificaSave: function(data){
+		if(data.success){
+			showMessage("Os dados foram salvos!");
+		} else {
+			showMessage("Houve um erro ao tentar salvar os dados. Tente novamente.");
+			console.log(data.message);
+		}
+	},
+	
 	pesquisaIrmaos:	function(data){
 						this.lista = data;
 						container = $("#listaIrmaos");
@@ -39,22 +120,31 @@ irmaos = {
 						$.each(data, function(index, value){
 							div = $('<div data-role="collapsible">');
 							h3 = $('<h3>');
-							p = $('<p>');
-							
 							h3.html(value.ir.nome);
-							p.append("<b>RG:</b> " + value.ir.rg + " / ");
-							p.append("<b>CPF:</b> " + value.ir.cpf + " / ");
-							p.append("<b>Data de Nascimento:</b> " + value.ir.data_nascimento + "<br />");
-							p.append("<b>Estado Civil:</b> " + value.ec.estado_civil + " / ");
-							p.append("<b>GFCM:</b> " + value.gf.nome);
+							
+							ul = $('<ul data-role="listview" class="ui-listview">');
+							li = $('<li class="ui-first-child">');
+							a = $('<a href="#" class="ui-btn ui-btn-icon-right ui-icon-carat-r">');
+							a.attr('data-index', index);
+							a.css('font-weight', 300);
+							
+							
+							a.append( irmaos.populaDadosPesquisa(value) );
+							a.click(function(ev){
+								ev.preventDefault();
+								irmaos.selecionado = $(this).attr('data-index');
+								$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageEditIrmao" );
+							});
+							
+							li.append(a);
+							ul.append(li);
 							
 							div.append(h3);
-							div.append(p);
+							div.append(ul);
 							container.append(div);
 						});
 						
 						container.collapsibleset( "refresh" );
-						//this.addEvento();
 					},
 }
 
@@ -63,89 +153,114 @@ irmaos = {
 var gfcmList = {
 	gfcms : {},
 	timeoutGfcm : null,
+	listaCarregada : false,
+	cargaAndamento: false,
+	listaExpira: null,
 	
 	/* Adiciona a lista de GFCMs no campo "select"
 	 */
-	listaGfcms : function(data, page = ''){
+	listaGfcms : function(data){
 					this.gfcms = data;
-					
-					clearTimeout(this.timeoutGfcm);
+					/*clearTimeout(this.timeoutGfcm);
 					this.timeoutGfcm = setTimeout(function(){ 
 						this.gfcms = {};
-					}, 60000);
+					}, 60000);*/
 					
-					if(page == ''){
-						obj = $("#selGfcm");
-					} else {
-						obj = $("#"+page).find("#selGfcm");
-					}
+					obj = $("#"+defaultValues.currPage).find("#selGfcm");
 					if(obj.length){
 						if(obj.find('[value=""]').length > 0){
 							vazio = obj.find('[value=""]').clone();
 						}
 						obj.html("");
 						obj.append(vazio);
+						obj.append(vazio);
 						$.each(data, function (index, value) {
 							obj.append('<option value="' + index + '">' + value + '</option>');
 						});
+					}
+					this.listaCarregada = true;
+					this.cargaAndamento = false;
+					if(this.listaExpira - (new Date()) < 0){
+						this.listaExpira = new Date( (new Date).getTime() + 10000 );
 					}
 				},
 	
 	/* Faz requisição ao servidor para obter a lista de GFCMs
 	 */
-	carregaGfcms : function(page = ''){
-						if(Object.keys(this.gfcms).length > 0){
-							gfcmList.listaGfcms(this.gfcms, page);
-							return;
+	carregaGfcms : function(callback = null){
+						this.listaCarregada = false;
+						
+						
+						// Verifica se já existe lista de GFCMs, e se a mesma não está expirada.
+						if(Object.keys(gfcmList.gfcms).length > 0){
+							if(gfcmList.listaExpira - (new Date()) > 0){
+								gfcmList.listaGfcms(gfcmList.gfcms, defaultValues.currPage);
+								if(callback !== null){
+									callback();
+								}
+								return;
+							} 
 						}
 						
-						if(page != '') { page = 'page:' + page + '/' };
+						if(this.cargaAndamento){
+							return;
+						}
+						this.cargaAndamento = true;
 						
-						$.ajax({
-							url			: defaultValues.urlServidor + '/Gfcms/list/' + page,
-							// url			: 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
-							// url			: 'http://www.fasfsadfsfsafas.mg.gov.br',
-							dataType	: 'jsonp',
-							success		: function(response){},
-							timeout		: defaultValues.timeoutDefault,
-							cache		: true,
-							statusCode	: statusCodeMessages,
-							jsonp		: 'listaGfcms',
-							tryCount	: defaultValues.tryCountDefault,
-							retryLimit	: defaultValues.retryLimitDefault,
-							beforeSend	: function(jqXHR, settings){
-											jsonpCallback = settings.jsonpCallback;
-											/*p1 = jqXHR;
-											p2 = settings;
-											jsonpCallback = getParameterByName(settings.jsonp, settings.url);
-											console.log('jsonpCallback: '+jsonpCallback)
-											settings.url = settings.url.replace(settings.jsonpCallback, settings.jsonp)
-											*/
-											settings.url = settings.url.replace(jsonpCallback, settings.jsonp)
-											urlArr = settings.url.split("?");
-											/* urlArr[1] = urlArr[1].replace("&", "/").replace("=", ":");
-											 eval("settings."+jsonpCallback+"=false;");
-											*/
-											urlArr[1] = urlArr[1].replace(new RegExp('&', 'g'), '/').replace(new RegExp('=', 'g'), ':');
-											settings.url = urlArr[0] + urlArr[1];
-											
-											defaultValues.loadingInProcess++;
-											$.mobile.loading('show');
-										},
-							complete	: function(){
-											defaultValues.loadingInProcess--;
-											if(defaultValues.loadingInProcess == 0){
-												$.mobile.loading('hide');
-											}
-										},
-							error		: function(jqXHR, textStatus, errorThrown){
-											myJqXHR = jqXHR;
-											if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
-												//$("#carregaGfcms").popup("open");
-												showMessage("Erro ao carregar lista de GFCMs.");
-											} 
-										}
+						sessao.getAutenticado(function(autenticado){
+							if(autenticado == 1){
+								pageParam = 'page:' + defaultValues.currPage + '/' 
+								$.ajax({
+									url			: defaultValues.urlServidor + '/Gfcms/list/' + pageParam,
+									// url			: 'http://www.treinasusfacil.mg.gov.br/acompanhamento/relatorio/CRE/CNES_IMP/listagfcms.json',
+									// url			: 'http://www.fasfsadfsfsafas.mg.gov.br',
+									dataType	: 'jsonp',
+									success		: function(response){},
+									timeout		: defaultValues.timeoutDefault,
+									cache		: true,
+									statusCode	: statusCodeMessages,
+									jsonp		: 'listaGfcms',
+									tryCount	: defaultValues.tryCountDefault,
+									retryLimit	: defaultValues.retryLimitDefault,
+									beforeSend	: function(jqXHR, settings){
+													jsonpCallback = settings.jsonpCallback;
+													settings.url = settings.url.replace(jsonpCallback, settings.jsonp)
+													urlArr = settings.url.split("?");
+													urlArr[1] = urlArr[1].replace(new RegExp('&', 'g'), '/').replace(new RegExp('=', 'g'), ':');
+													settings.url = urlArr[0] + urlArr[1];
+													
+													defaultValues.loadingInProcess++;
+													$.mobile.loading('show');
+												},
+									complete	: function(){
+													defaultValues.loadingInProcess--;
+													if(defaultValues.loadingInProcess == 0){
+														$.mobile.loading('hide');
+													}
+													
+													if(callback !== null){
+														esperaCarrLista = setInterval(function(){
+															if(gfcmList.listaCarregada){
+																callback();
+																clearInterval(esperaCarrLista);
+															}
+														}, 200);
+													}
+													
+													
+												},
+									error		: function(jqXHR, textStatus, errorThrown){
+													myJqXHR = jqXHR;
+													if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
+														showMessage("Erro ao carregar lista de GFCMs.");
+													} 
+												}
+								});
+							
+
+							}
 						});
+		
 					}
 
 };
@@ -182,19 +297,9 @@ $(function(){
 							}
 						},
 			error		: function(jqXHR, strError, txt){
-							
-							// $("#teste").append("\n<br>jqXHR: "+jqXHR);
-							// $("#teste").append("\n<br>jqXHR.statusText: "+jqXHR.statusText);
-							// $("#teste").append("\n<br>strError: "+strError);
-							// $("#teste").append("\n<br>txt: "+txt);
-							
 							if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
-								//$("#formMessage").popup("open");
 								showMessage("Erro ao enviar dados do formulário.");
 							} 
-							// {
-							//	$("#teste").append("\n<br>Erro na autenticação com retorno success");
-							// }
 						}
 		
 		});
@@ -228,7 +333,6 @@ $(function(){
 							},
 				error		: function(jqXHR, textStatus, errorThrown){
 								if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
-									//$("#msgSaida").popup("open");
 									showMessage("Erro ao registrar saída. Por favor, tente novamente.");
 								} 
 							}
@@ -237,22 +341,30 @@ $(function(){
 	});
 	
 });
-
 	
 $(document).on('pagechange',function(){
 	defaultValues.currPage = $.mobile.activePage.attr("id");
 	
 	if(defaultValues.currPage != 'pageLogin'){
-		//debugger;
 		sessao.validaSessao();
 	}
 	
-	if($('div.ui-content').find("#selGfcm").length){
-		sessao.getAutenticado(function(autenticado){
-			if(autenticado == 1){
-				gfcmList.carregaGfcms(defaultValues.currPage);
-			}
+	if(defaultValues.currPage == 'pageEditIrmao'){
+		irmaos.editIrmaoSelecionado();
+		
+		$("#btnSalvarEditIrmao").click(function(){
+			
 		});
+	}
+	
+	if( $("#"+defaultValues.currPage).find("#selGfcm").length ){
+		gfcmList.carregaGfcms();
+		
+		/*sessao.getAutenticado(function(autenticado){
+			if(autenticado == 1){
+				
+			}
+		});*/
 	}
 	
 	// $('#dataNascimento').datepicker();
@@ -263,12 +375,15 @@ $(document).on('pagechange',function(){
 		setExpire("PHPSESSID", 10);
 	}
 	
-	if($.mobile.activePage.attr('id') != 'pageLogin'){
+	pagesSemTempo = ['pageLogin', 'pageTimeout'];
+	isPageSemTempo = pagesSemTempo.indexOf( defaultValues.currPage );
+	if(isPageSemTempo == -1){
 		timeoutSessao.inicializa();
 	} else {
-		timeoutSessao.finaliza();
+		if(defaultValues.currPage != 'pageTimeout'){
+			timeoutSessao.finaliza();
+		}
 	}
 });
-
 
 app.initialize();

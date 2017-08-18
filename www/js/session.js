@@ -7,18 +7,10 @@ sessao = {
 	
 	/* Obtém o valor de "autenticado", considerando que há "verificacaoEmAndamento"; Executa "callback" após a verificação.
 	 */
-	getAutenticado: function(callback){
+	getAutenticado: function(callback = function(){}){
 		sessao.validaSessao(function(){
 			callback(sessao.autenticado);
 		});
-		
-		
-		/*var intervalo = setInterval(function(){
-			if(sessao.verificacaoEmAndamento == 0){
-				clearInterval(intervalo);
-				callback(sessao.autenticado);
-			}
-		}, 200);*/
 	},
 	
 	/* Se o usuário e senha digitado na tela de login estão corretos, registra a sessão localmente
@@ -26,13 +18,10 @@ sessao = {
 	verificaAutenticacao: function(data){
 							if(data.success == 1){
 								this.autenticado = 1;
-								//setCookie()
-								//window.location.href="index.html#pageInicio";
 								$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageInicio" );
 							} else {
 								this.autenticado = 0;
-								//$("#verificaAutenticacao").popup("open");
-								showMessage("Usuário e senha incorretos.");
+								showMessage("Usu&aacute;rio e senha incorretos.");
 							}
 						},
 	
@@ -43,16 +32,21 @@ sessao = {
 							this.autenticado = 1;
 						} else {
 							this.autenticado = 0;
-							//window.location.href="index.html#pageLogin";
-							/*pageContainer = $(":mobile-pagecontainer");
-							pageContainer.pagecontainer( "change", "index.html#pageLogin", { role: "dialog" } );*/
 							this.sair();
 						}
 					},
 	
 	/* Faz requisição ao servidor para verificar se o usuário está autenticado
 	 */
-	validaSessao: function (callback){
+	validaSessao: function (callback = function(){}){
+					if(sessao.verificacaoEmAndamento){
+						intervVerifica = setInterval(function(){
+							if( ! sessao.verificacaoEmAndamento){
+								callback();
+								clearInterval(intervVerifica);
+							}
+						}, 300);
+					}
 					this.verificacaoEmAndamento = 1;
 					$.ajax({
 						url			: defaultValues.urlServidor + '/app/isLogged/',
@@ -79,13 +73,13 @@ sessao = {
 										if(defaultValues.loadingInProcess == 0){
 											$.mobile.loading('hide');
 										}
+										sessao.verificacaoEmAndamento = 0;
 										callback();
 									},
 						error		: function(jqXHR, textStatus, errorThrown){
 										sessao.myJqXHR = jqXHR;
 										if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
-											//$("#validaSessao").popup("open");
-											showMessage("Erro ao validar sessão.");
+											showMessage("Erro ao validar sess&atilde;o.");
 										} 
 									}
 					});
@@ -93,9 +87,7 @@ sessao = {
 	
 	sair: function (){
 				this.autenticado = 0;
-				//window.location.href="index.html#pageLogin";
 				activePage = $.mobile.activePage;
-				//$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin" );
 				$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageLogin", {
 					role: "dialog",
 					changeHash: false
@@ -107,16 +99,13 @@ timeoutSessao = {
 	intervSessao	: null,
 	intervAviso		: null,
 	minutos			: null,
-	//segundos		: null,
-	timeout			: 10,
-	minAviso		: 2,
-	//inicializado	: false,
+	timeout			: 600,
+	minAviso		: 120,
 	
 	finaliza		: function(){
 						clearInterval(this.intervSessao);
 						clearInterval(timeoutSessao.intervAviso);
 						this.minutos = this.timeout;
-						//this.segundos= this.timeout*60;
 					},
 	
 	inicializa		: function(){
@@ -124,24 +113,18 @@ timeoutSessao = {
 						
 						if($.mobile.activePage.attr('id') != 'pageTimeout'){
 							this.intervSessao = setInterval(function(){
-								/*timeoutSessao.segundos--;
-								if(timeoutSessao.segundos%60 == 59){
-									timeoutSessao.minutos--;
-								}*/
 								timeoutSessao.minutos--;
-								if(timeoutSessao.minutos == timeoutSessao.minAviso/* && timeoutSessao.segundos%60 == 0*/){
+								if(timeoutSessao.minutos == timeoutSessao.minAviso){
 									timeoutSessao.showMessageTimeout();
 									clearInterval(timeoutSessao.intervSessao);
-									clearInterval(this);
 								}
-							}, 60000);
+							}, 1000);
 							
 						}
 						
 					},
 	
 	encerrar		: function(){
-							clearInterval(timeoutSessao.intervSessao);
 							$.ajax({
 								url			: defaultValues.urlServidor + '/app/logout',
 								dataType	: 'jsonp',
@@ -168,20 +151,20 @@ timeoutSessao = {
 												} 
 											}
 							});
-						
-							//this.inicializado = false;
 						},
 						
 	showMessageTimeout	: function(){
 								$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageTimeout", { role: "dialog" } );
 								
-								min=this.minAviso;
-								seg=0;
+								/*min = this.minAviso;
+								seg = 0;*/
+								min = 0;
+								seg = this.minAviso;
+								
 								this.intervAviso = setInterval(function(){
 									if(seg == 0 && min == 0){
 										timeoutSessao.encerrar();
 										clearInterval(timeoutSessao.intervAviso);
-										clearInterval(this);
 									}
 
 									if(seg < 10){
