@@ -37,7 +37,7 @@ body {
     );
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
+    font-size:16px;
     height:100%;
     margin:0px;
     padding:0px;
@@ -82,7 +82,7 @@ h1 {
     border-radius:4px;
     -webkit-border-radius:4px;
     color:#FFFFFF;
-    font-size:12px;
+    font-size:16px;
     margin:0px 30px;
     padding:2px 0px;
 }
@@ -143,5 +143,5 @@ body{
 }*/
 
 .formButtons div, .formButtons a{
-	width: 35%;
+	width: 30%;
 }
