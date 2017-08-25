@@ -264,15 +264,23 @@ var gfcmList = {
 					}
 
 };
-				
+
+function redirecionaAposNovo(){
+	$(":mobile-pagecontainer").pagecontainer( "change", "index.html#pageInicio" );
+	showMessage("Os dados do irmão foram salvos!");
+}
+		
 $(function(){
 	$("form").submit(function(ev){
 		ev.preventDefault();
 		ev.stopPropagation();
 		
+		timeoutSessao.inicializa();
+		
 		dados = $(this).serialize();
 		action = $(this).attr("action");
 		jsonpCallback = $(this).attr("data-jsonp");
+		callback = $(this).attr("data-callback");
 		
 		$.ajax({
 			type		: 'POST',
@@ -295,6 +303,7 @@ $(function(){
 							if(defaultValues.loadingInProcess == 0){
 								$.mobile.loading('hide');
 							}
+							eval(callback);
 						},
 			error		: function(jqXHR, strError, txt){
 							if(jqXHR.statusText != "success" && jqXHR.statusText != "OK"){
@@ -303,10 +312,6 @@ $(function(){
 						}
 		
 		});
-		
-		
-		
-		
 	});
 	
 	$(".btnSair").each(function(){
@@ -351,10 +356,6 @@ $(document).on('pagechange',function(){
 	
 	if(defaultValues.currPage == 'pageEditIrmao'){
 		irmaos.editIrmaoSelecionado();
-		
-		$("#btnSalvarEditIrmao").click(function(){
-			
-		});
 	}
 	
 	if( $("#"+defaultValues.currPage).find("#selGfcm").length ){
