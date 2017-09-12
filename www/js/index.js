@@ -358,6 +358,14 @@ $(document).on('pagechange',function(){
 		irmaos.editIrmaoSelecionado();
 	}
 	
+	if(defaultValues.currPage == 'pageNovoIrmao'){
+		// Limpa os dados do formulário
+		$.mobile.activePage.find("#nome").val("");
+		$.mobile.activePage.find("#cpf").val("");
+		$.mobile.activePage.find("#data_nascimento").val("");
+		$.mobile.activePage.find("#selGfcm").val("");
+	}
+	
 	if( $("#"+defaultValues.currPage).find("#selGfcm").length ){
 		gfcmList.carregaGfcms();
 		
